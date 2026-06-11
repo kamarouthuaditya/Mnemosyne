@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Playfair_Display, Montserrat } from "next/font/google";
+import Nav from "@/components/Nav";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -23,13 +24,6 @@ export const metadata: Metadata = {
     "A career memory. Not just what Aditya Kamarouthu built, but how he reasoned about it.",
 };
 
-const nav = [
-  { href: "/", label: "Overview" },
-  { href: "/timeline", label: "Timeline" },
-  { href: "/achievements", label: "Achievements" },
-  { href: "/weekly", label: "Weekly" },
-];
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
@@ -42,17 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </span>
               <span className="label hidden sm:inline">Career Memory</span>
             </Link>
-            <nav className="flex gap-6">
-              {nav.map((n) => (
-                <Link
-                  key={n.href}
-                  href={n.href}
-                  className="text-[14px] font-medium text-ink-soft transition-colors hover:text-ink"
-                >
-                  {n.label}
-                </Link>
-              ))}
-            </nav>
+            <Nav />
           </div>
         </header>
 

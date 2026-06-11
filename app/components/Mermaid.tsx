@@ -17,7 +17,7 @@ export default function Mermaid({ chart }: { chart: string }) {
       if (!initialized) {
         mermaid.initialize({
           startOnLoad: false,
-          theme: "dark",
+          theme: "neutral",
           securityLevel: "strict",
           fontFamily: "inherit",
         });
@@ -37,7 +37,7 @@ export default function Mermaid({ chart }: { chart: string }) {
 
   if (err) {
     return (
-      <pre className="overflow-x-auto rounded-lg border border-rose-500/30 bg-rose-500/5 p-3 text-xs text-rose-300">
+      <pre className="overflow-x-auto border border-ink/30 bg-paper-sunk p-3 text-xs text-ink-soft">
         {chart}
       </pre>
     );
@@ -46,7 +46,7 @@ export default function Mermaid({ chart }: { chart: string }) {
   return (
     <div
       ref={ref}
-      className="my-4 flex justify-center overflow-x-auto rounded-lg border border-white/10 bg-white/[0.02] p-4 [&_svg]:max-w-full"
+      className="my-4 flex justify-center overflow-x-auto border border-rule bg-paper-sunk p-4 [&_svg]:max-w-full"
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

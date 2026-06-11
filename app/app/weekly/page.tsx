@@ -24,11 +24,11 @@ export default async function WeeklyPage() {
       <div className="space-y-4">
         {reports.map((r) => (
           <Card key={r.id}>
-            <div className="text-xs text-white/40">
-              {fmtDate(r.week_start)} – {fmtDate(r.week_end)}
+            <div className="label">
+              {fmtDate(r.week_start)} to {fmtDate(r.week_end)}
             </div>
             {r.highlights && r.highlights.length > 0 && (
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-white/75">
+              <ul className="mt-4 list-disc space-y-1.5 pl-5 text-[14px] text-ink-soft marker:text-ink-faint">
                 {r.highlights.map((h: string, i: number) => (
                   <li key={i}>{h}</li>
                 ))}

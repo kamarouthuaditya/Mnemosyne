@@ -26,26 +26,28 @@ export default async function AchievementsPage() {
       <PageTitle title="Achievements" subtitle="The notable wins, grouped by project." />
       <NotConfigured />
       {supabase && rows.length === 0 && <Empty>No achievements yet.</Empty>}
-      <div className="space-y-8">
+      <div className="space-y-10">
         {Object.entries(groups).map(([project, items]) => (
           <section key={project}>
-            <h2 className="mb-3 text-sm font-medium text-white/60">{project}</h2>
-            <ul className="space-y-2">
+            <h2 className="label mb-4">{project}</h2>
+            <ul className="border-t border-rule">
               {items.map((a) => (
-                <li key={a.id} className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="font-medium">{a.title}</div>
+                <li key={a.id} className="border-b border-rule py-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="font-display text-lg font-medium text-ink">{a.title}</div>
                     {a.occurred_on && (
-                      <span className="shrink-0 text-xs text-white/40">{fmtDate(a.occurred_on)}</span>
+                      <span className="shrink-0 text-[12px] uppercase tracking-[0.06em] text-ink-faint">
+                        {fmtDate(a.occurred_on)}
+                      </span>
                     )}
                   </div>
-                  {a.impact && <p className="mt-1 text-sm text-white/60">{a.impact}</p>}
+                  {a.impact && <p className="mt-1 text-[14px] text-ink-soft">{a.impact}</p>}
                   {a.description && (
                     <div className="mt-1">
                       <Markdown>{a.description}</Markdown>
                     </div>
                   )}
-                  <div className="mt-2 flex flex-wrap gap-1.5">
+                  <div className="mt-3 flex flex-wrap gap-1.5">
                     {a.features?.name && <Tag>{a.features.name}</Tag>}
                     {(a.tags ?? []).map((t: string) => (
                       <Tag key={t}>{t}</Tag>

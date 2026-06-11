@@ -28,40 +28,52 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
   if (!e) notFound();
 
   return (
-    <article>
-      <div className="flex items-center gap-3 text-xs text-white/40">
+    <article className="max-w-3xl">
+      <div className="flex flex-wrap items-center gap-x-2 text-[12px] uppercase tracking-[0.08em] text-ink-faint">
         <span>{fmtDate(e.occurred_on)}</span>
-        <span>·</span>
-        <Link href={`/projects/${e.projects?.slug}`} className="hover:text-white">
+        <span aria-hidden>/</span>
+        <Link href={`/projects/${e.projects?.slug}`} className="text-ink-soft hover:text-ink">
           {e.projects?.name}
         </Link>
-        {e.features?.name && <span className="text-white/30">/ {e.features.name}</span>}
+        {e.features?.name && (
+          <>
+            <span aria-hidden>/</span>
+            <span>{e.features.name}</span>
+          </>
+        )}
       </div>
-      <h1 className="mt-2 text-2xl font-semibold tracking-tight">{e.title}</h1>
-      <div className="mt-3 flex items-center gap-3">
+
+      <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink">
+        {e.title}
+      </h1>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rule pb-6">
         <SourceBadges source={e.source} />
         {e.source_ref && e.source_ref !== "manual" && (
-          <span className="font-mono text-xs text-white/40">{e.source_ref}</span>
+          <span className="font-mono text-[12px] text-ink-faint">{e.source_ref}</span>
         )}
         {e.files_changed != null && (
-          <span className="text-xs text-white/40">{e.files_changed} files</span>
+          <span className="label !text-ink-faint">{e.files_changed} files</span>
         )}
       </div>
 
       {e.summary && (
-        <div className="mt-6">
+        <div className="mt-7 text-[15px]">
           <Markdown>{e.summary}</Markdown>
         </div>
       )}
 
-      {/* Decision log — the PM-showcase layer */}
-      <section className="mt-8 space-y-px overflow-hidden rounded-xl border border-white/10">
+      {/* Decision log, the reasoning trail */}
+      <section className="mt-10 border-t border-rule">
         {FIELDS.filter((f) => e[f.key]).map((f) => (
-          <div key={f.key} className="grid grid-cols-[160px_1fr] gap-4 bg-white/[0.02] p-4">
-            <div className="pt-0.5 text-xs font-medium uppercase tracking-wide text-white/40">
-              {f.label}
+          <div
+            key={f.key}
+            className="grid gap-x-8 gap-y-2 border-b border-rule py-7 sm:grid-cols-[180px_1fr]"
+          >
+            <div className="label pt-1">{f.label}</div>
+            <div className="text-[15px]">
+              <Markdown>{e[f.key]}</Markdown>
             </div>
-            <Markdown>{e[f.key]}</Markdown>
           </div>
         ))}
       </section>

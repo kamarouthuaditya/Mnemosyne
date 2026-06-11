@@ -36,29 +36,44 @@ export default async function FeaturePage({
 
   return (
     <div>
-      <div className="mb-1 text-sm text-white/40">
-        <Link href={`/projects/${slug}`} className="hover:text-white">
-          {project.name}
-        </Link>{" "}
-        /
+      <div className="mb-2">
+        <Link
+          href={`/projects/${slug}`}
+          className="label !text-ink-faint hover:!text-ink"
+        >
+          {project.name} /
+        </Link>
       </div>
       <PageTitle title={feat.name} subtitle={feat.description ?? undefined} />
       {(!entries || entries.length === 0) && <Empty>No entries for this feature yet.</Empty>}
-      <ol className="relative border-l border-white/10">
+      <div className="border-t border-rule">
         {entries?.map((e) => (
-          <li key={e.id} className="mb-6 ml-5">
-            <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white/30 bg-[#0a0a0b]" />
-            <div className="text-xs text-white/40">{fmtDate(e.occurred_on)}</div>
-            <Link href={`/entries/${e.id}`} className="mt-1 block font-medium hover:underline">
-              {e.title}
-            </Link>
-            {e.outcome && <p className="mt-1 text-sm text-white/50">{e.outcome}</p>}
-            <div className="mt-2">
-              <SourceBadges source={e.source} />
+          <article
+            key={e.id}
+            className="grid grid-cols-[6.5rem_1fr] gap-x-5 border-b border-rule py-5"
+          >
+            <div className="pt-0.5 text-[12px] uppercase tracking-[0.06em] text-ink-faint">
+              {fmtDate(e.occurred_on)}
             </div>
-          </li>
+            <div className="min-w-0">
+              <Link
+                href={`/entries/${e.id}`}
+                className="block font-display text-lg font-medium leading-snug text-ink hover:underline"
+              >
+                {e.title}
+              </Link>
+              {e.outcome && (
+                <p className="mt-1 max-w-[64ch] text-[14px] text-ink-soft line-clamp-2">
+                  {e.outcome}
+                </p>
+              )}
+              <div className="mt-2">
+                <SourceBadges source={e.source} />
+              </div>
+            </div>
+          </article>
         ))}
-      </ol>
+      </div>
     </div>
   );
 }

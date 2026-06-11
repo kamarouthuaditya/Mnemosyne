@@ -2,11 +2,53 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+
+  --paper: oklch(0.985 0.002 90);
+  --paper-sunk: oklch(0.965 0.002 90);
+  --ink: oklch(0.18 0.004 90);
+  --ink-soft: oklch(0.42 0.003 90);
+  --ink-faint: oklch(0.6 0.003 90);
+  --rule: oklch(0.88 0.003 90);
+  --rule-strong: oklch(0.72 0.003 90);
+}
+
+@theme inline {
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-montserrat);
+  --color-paper: var(--paper);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --radius: 0px;
+}
+
+* {
+  border-radius: 0 !important;
 }
 
 body {
-  background: #0a0a0b;
-  color: #e7e7ea;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+/* small editorial meta label */
+.label {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
 }

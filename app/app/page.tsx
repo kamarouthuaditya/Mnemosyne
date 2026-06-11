@@ -32,7 +32,7 @@ export default async function OverviewPage() {
   return (
     <div>
       {/* Editorial hero */}
-      <section className="border-b border-rule pb-14">
+      <section className="border-b border-rule pb-8">
         <p className="label">Career Memory</p>
         <h1 className="mt-5 max-w-[16ch] font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-7xl">
           Mnemosyne
@@ -65,7 +65,7 @@ export default async function OverviewPage() {
       </section>
 
       {/* Project ledger */}
-      <section className="mt-14">
+      <section className="mt-12">
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="label">Projects</h2>
           <Link href="/timeline" className="text-[14px] font-medium text-ink-soft hover:text-ink">

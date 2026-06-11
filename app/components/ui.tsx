@@ -96,6 +96,13 @@ export function stripMd(md: string | null): string {
     .trim();
 }
 
+/** Lead paragraph of a markdown doc, flattened to plain text. For ledger/preview rows. */
+export function excerpt(md: string | null): string {
+  if (!md) return "";
+  const firstBlock = md.trim().split(/\n\s*\n/)[0] ?? "";
+  return stripMd(firstBlock);
+}
+
 export function fmtDate(d: string | null) {
   if (!d) return "";
   return new Date(d + "T00:00:00").toLocaleDateString("en-US", {

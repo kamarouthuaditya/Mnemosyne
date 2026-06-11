@@ -63,7 +63,7 @@ export default async function FeaturePage({
                 {e.title}
               </Link>
               {e.outcome && (
-                <p className="mt-1 max-w-[64ch] text-[16px] text-ink-soft line-clamp-2">
+                <p className="mt-1 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
                   {e.outcome}
                 </p>
               )}

@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section>
         <div className="mb-5 border-b border-rule pb-3">
           <h2 className="label">Entries</h2>
-          <p className="mt-1.5 max-w-[68ch] text-[14px] leading-relaxed text-ink-soft">
+          <p className="mt-1.5 text-[14px] leading-relaxed text-ink-soft">
             Each entry is a decision log: what was built, why it mattered, and how it works. Open one
             for the full context, options weighed, decision, and outcome.
           </p>
@@ -111,7 +111,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   {e.title}
                 </Link>
                 {e.outcome && (
-                  <p className="mt-1 max-w-[64ch] text-[16px] text-ink-soft line-clamp-2">
+                  <p className="mt-1 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
                     {e.outcome}
                   </p>
                 )}

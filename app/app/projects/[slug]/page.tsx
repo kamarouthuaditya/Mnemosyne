@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         {project.started_at && <Tag>since {fmtDate(project.started_at)}</Tag>}
       </div>
       {project.description && (
-        <div className="mb-12 max-w-[68ch]">
+        <div className="mb-12">
           <Markdown>{project.description}</Markdown>
         </div>
       )}

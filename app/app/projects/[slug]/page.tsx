@@ -94,16 +94,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       {achievements && achievements.length > 0 && (
-        <section className="mb-12">
-          <h2 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-ink">
-            <Award className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
+        <section className="mb-12 bg-ink px-7 py-7">
+          <h2 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-paper">
+            <Award className="lucide h-5 w-5 text-paper/70" strokeWidth={1.5} />
             Achievements
           </h2>
-          <ul className="border-t border-rule">
+          <ul className="border-t border-paper/20">
             {achievements.map((a) => (
-              <li key={a.id} className="border-b border-rule py-4">
-                <div className="font-medium text-ink">{a.title}</div>
-                {a.impact && <p className="mt-0.5 text-[16px] text-ink-soft">{a.impact}</p>}
+              <li key={a.id} className="border-b border-paper/15 py-4 last:border-b-0">
+                <div className="font-medium text-paper">{a.title}</div>
+                {a.impact && (
+                  <p className="mt-1 text-[16px] leading-relaxed text-paper/70">{a.impact}</p>
+                )}
               </li>
             ))}
           </ul>

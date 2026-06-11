@@ -54,7 +54,7 @@ export default async function OverviewPage() {
         </p>
 
         {projects.length > 0 && (
-          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t border-rule pt-6">
+          <dl className="mt-10 grid grid-cols-3 divide-x divide-rule border-t border-rule pt-6">
             <Stat n={projects.length} label="Projects" />
             <Stat n={totalEntries} label="Decision logs" />
             {earliest && <Stat n={fmtDate(earliest)} label="Since" />}
@@ -121,7 +121,7 @@ export default async function OverviewPage() {
 
 function Stat({ n, label }: { n: number | string; label: string }) {
   return (
-    <div>
+    <div className="px-8 first:pl-0">
       <dd className="font-display text-3xl font-medium tabular-nums text-ink">{n}</dd>
       <dt className="label mt-1">{label}</dt>
     </div>

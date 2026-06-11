@@ -1,10 +1,19 @@
 import Link from "next/link";
 import { supabaseConfigured } from "@/lib/supabase";
 
-export function PageTitle({ title, subtitle }: { title: string; subtitle?: string }) {
+export function PageTitle({
+  title,
+  subtitle,
+  icon,
+}: {
+  title: string;
+  subtitle?: string;
+  icon?: React.ReactNode;
+}) {
   return (
     <div className="mb-10 border-b border-rule pb-6">
-      <h1 className="font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+      <h1 className="flex items-center gap-3.5 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        {icon}
         {title}
       </h1>
       {subtitle && (

@@ -1,3 +1,4 @@
+import { Award, Folder } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Empty, NotConfigured, PageTitle, Tag, fmtDate } from "@/components/ui";
 import Markdown from "@/components/Markdown";
@@ -23,13 +24,20 @@ export default async function AchievementsPage() {
 
   return (
     <div>
-      <PageTitle title="Achievements" subtitle="The notable wins, grouped by project." />
+      <PageTitle
+        title="Achievements"
+        subtitle="The notable wins, grouped by project."
+        icon={<Award className="lucide h-8 w-8 text-ink-soft" strokeWidth={1.5} />}
+      />
       <NotConfigured />
       {supabase && rows.length === 0 && <Empty>No achievements yet.</Empty>}
       <div className="space-y-10">
         {Object.entries(groups).map(([project, items]) => (
           <section key={project}>
-            <h2 className="label mb-4">{project}</h2>
+            <h2 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-ink">
+              <Folder className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
+              {project}
+            </h2>
             <ul className="border-t border-rule">
               {items.map((a) => (
                 <li key={a.id} className="border-b border-rule py-5">

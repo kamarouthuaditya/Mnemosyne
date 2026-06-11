@@ -38,9 +38,11 @@ export default async function OverviewPage() {
           Mnemosyne
         </h1>
         <p className="mt-7 text-justify text-lg leading-relaxed text-ink-soft [hyphens:auto]">
-          A record of engineering judgment over time. Not just <em>what</em> was built, but{" "}
-          <em>how it was reasoned about</em>: the context, the options weighed, the decision, its
-          rationale, the foresight at the time, and what actually happened.
+          A record of engineering judgment over time. Not just{" "}
+          <strong className="font-semibold text-ink">what</strong> was built, but{" "}
+          <strong className="font-semibold text-ink">how it was reasoned about</strong>: the context,
+          the options weighed, the decision, its rationale, the foresight at the time, and what
+          actually happened.
         </p>
         <p className="mt-4 text-justify text-[17px] leading-relaxed text-ink-faint [hyphens:auto]">
           Each entry self-assembles from real signals, git history, pull requests, working
@@ -97,7 +99,7 @@ export default async function OverviewPage() {
                     <span className="label shrink-0">{p.status}</span>
                   </div>
                   {p.description && (
-                    <p className="mt-2 text-[16px] leading-relaxed text-ink-soft line-clamp-2">
+                    <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">
                       {stripMd(p.description)}
                     </p>
                   )}
@@ -121,9 +123,9 @@ export default async function OverviewPage() {
 
 function Stat({ n, label }: { n: number | string; label: string }) {
   return (
-    <div className="px-8 first:pl-0">
-      <dd className="font-display text-3xl font-medium tabular-nums text-ink">{n}</dd>
-      <dt className="label mt-1">{label}</dt>
+    <div className="flex flex-col justify-center px-8 py-1.5 first:pl-0">
+      <dd className="font-display text-3xl font-medium leading-none tabular-nums text-ink">{n}</dd>
+      <dt className="label mt-2">{label}</dt>
     </div>
   );
 }

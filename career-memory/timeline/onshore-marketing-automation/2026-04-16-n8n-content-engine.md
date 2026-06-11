@@ -2,10 +2,10 @@
 type: work_entry
 project: onshore-marketing-automation
 feature: n8n-content-engine
-occurred_on: 2026-06-10
+occurred_on: 2026-04-16
 title: Built and activated the daily AI content-generation workflow in n8n
 source: [transcript]
-source_ref: 83802fab
+source_ref: manual
 skills: [n8n, workflow-automation, openrouter, anthropic-claude, supabase, prompt-engineering, infrastructure-as-code]
 files_changed: 0
 context: "Onshore Labs needed a steady stream of on-brand social posts across Instagram, X, and LinkedIn without a person sitting down to write them every day. We had an n8n automation platform available and an AI model budget — the job was to turn a daily schedule into finished, image-backed draft posts saved somewhere a human could review them."

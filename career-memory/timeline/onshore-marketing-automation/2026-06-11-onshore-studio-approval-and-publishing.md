@@ -2,12 +2,12 @@
 type: work_entry
 project: onshore-marketing-automation
 feature: onshore-studio
-occurred_on: 2026-06-10
+occurred_on: 2026-06-11
 title: Built Onshore Studio — the review, approve, and publish app over the content engine
-source: [transcript]
-source_ref: 7146e38f
+source: [commit, transcript]
+source_ref: 4a93711
 skills: [next.js, react, typescript, tailwind, supabase, "social-media-apis", ui-design, server-actions]
-files_changed: 0
+files_changed: 33
 context: "The n8n Content Engine produces AI-drafted posts every morning, but nothing should go live unsupervised. A person needed a single place to see the day's drafts, fix a caption, approve or reject each one, and then actually publish the approved posts to Instagram, X, and LinkedIn — without juggling three platform dashboards."
 options_considered: |
   - **Review drafts directly in the database / a generic admin tool** — zero build effort, but a raw

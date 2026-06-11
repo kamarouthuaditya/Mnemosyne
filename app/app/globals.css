@@ -72,3 +72,9 @@ body {
   border-color: var(--rule);
   color: var(--ink-faint);
 }
+
+/* sharp icons to match the no-rounded theme */
+svg.lucide {
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}

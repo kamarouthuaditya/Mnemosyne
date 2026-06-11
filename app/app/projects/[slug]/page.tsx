@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BookOpen, ScrollText, ArrowDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Card, Empty, NotConfigured, PageTitle, SourceBadges, Tag, fmtDate } from "@/components/ui";
 import Markdown from "@/components/Markdown";
@@ -42,6 +43,27 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <Tag>{project.status}</Tag>
         {project.started_at && <Tag>since {fmtDate(project.started_at)}</Tag>}
       </div>
+
+      {/* How to read this — top-of-page guide */}
+      <div className="mb-12 flex items-start gap-4 bg-paper-sunk px-5 py-4">
+        <BookOpen className="lucide mt-0.5 h-5 w-5 shrink-0 text-ink" strokeWidth={1.5} />
+        <div>
+          <p className="label !text-ink-faint">How to read this</p>
+          <p className="mt-1.5 text-[14px] leading-relaxed text-ink-soft">
+            This page is the project overview. Scroll to the{" "}
+            <a
+              href="#entries"
+              className="inline-flex items-center gap-1 font-medium text-ink underline underline-offset-2"
+            >
+              Entries
+              <ArrowDown className="lucide h-3.5 w-3.5" strokeWidth={2} />
+            </a>{" "}
+            section at the bottom: each entry is a decision log of what was built, why it mattered,
+            and how it works.
+          </p>
+        </div>
+      </div>
+
       {project.description && (
         <div className="mb-12">
           <Markdown>{project.description}</Markdown>
@@ -82,15 +104,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      <section>
-        <h2 className="label mb-3">Entries</h2>
-        <div className="mb-6 bg-paper-sunk px-5 py-4">
-          <p className="label mb-1.5 !text-ink-faint">How to read this</p>
-          <p className="text-[14px] leading-relaxed text-ink-soft">
-            Each entry is a decision log: what was built, why it mattered, and how it works. Open one
-            for the full context, options weighed, decision, and outcome.
-          </p>
-        </div>
+      <section id="entries" className="scroll-mt-8">
+        <h2 className="label mb-5 flex items-center gap-2">
+          <ScrollText className="lucide h-4 w-4 text-ink-soft" strokeWidth={1.5} />
+          Entries
+        </h2>
         {(!entries || entries.length === 0) && <Empty>No entries yet.</Empty>}
         <div className="border-t border-rule">
           {entries?.map((e) => (

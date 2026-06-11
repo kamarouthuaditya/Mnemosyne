@@ -49,6 +49,7 @@ decision: "Event-driven sends via Supabase webhooks → Resend templates."
 rationale: "No cron, no missed sends, idempotent on order id."
 foresight: "Anticipated duplicate-send risk; added idempotency key + retry cap."
 outcome: "Zero manual emails; <2s delivery."
+business_impact: "Removed ~5 hrs/wk of manual ops work; faster customer response."   # optional — cost/time/revenue/risk saved, with currency
 ---
 ## What I built
 Order-confirmation emails now send **themselves** the moment a customer checks out — no one on the
@@ -69,7 +70,9 @@ flowchart LR
 **The body AND the PM fields render as rich markdown with Mermaid diagrams in the app** — write for a
 non-technical reader (headings, bold, bullets, a diagram when a flow helps). The
 `context / options_considered / decision / rationale / foresight / outcome` fields are the
-PM-showcase layer — critical thinking as structured data, not buried prose. For `/worklog note`
+PM-showcase layer — critical thinking as structured data, not buried prose. `business_impact` is
+optional and holds the concrete value (cost saved/added, time, revenue, risk) with currency, e.g.
+`"Placid cost ~$39/mo (~₹4.5k/mo); now self-hosted at ~$0."` For `/worklog note`
 entries (`source: [manual]`) these fields ARE the deliverable.
 
 ## type: achievement — `achievements/<slug>.md`

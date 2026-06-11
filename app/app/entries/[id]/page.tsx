@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { TrendingUp } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { NotConfigured, SourceBadges, fmtDate } from "@/components/ui";
 import Markdown from "@/components/Markdown";
@@ -56,6 +57,18 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
           <span className="label !text-ink-faint">{e.files_changed} files</span>
         )}
       </div>
+
+      {e.business_impact && (
+        <section className="mt-7 bg-ink-muted px-6 py-5">
+          <h2 className="mb-2 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-paper/70">
+            <TrendingUp className="lucide h-4 w-4" strokeWidth={1.5} />
+            Business impact
+          </h2>
+          <p className="whitespace-pre-line text-[16px] leading-relaxed text-paper/90">
+            {e.business_impact}
+          </p>
+        </section>
+      )}
 
       {e.summary && (
         <div className="mt-7 text-[17px]">

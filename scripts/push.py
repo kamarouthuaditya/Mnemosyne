@@ -161,6 +161,7 @@ class Pusher:
             "rationale": m.get("rationale"),
             "foresight": m.get("foresight"),
             "outcome": m.get("outcome"),
+            "business_impact": m.get("business_impact"),
         }
         row = {k: v for k, v in row.items() if v is not None}
         stored = self._upsert("work_entries", row, "project_id,source_ref,occurred_on")

@@ -33,6 +33,7 @@ export type WorkEntry = {
   rationale: string | null;
   foresight: string | null;
   outcome: string | null;
+  business_impact: string | null;
 };
 
 export type Achievement = {

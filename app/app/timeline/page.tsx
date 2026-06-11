@@ -42,61 +42,75 @@ export default async function TimelinePage() {
       {supabase && entries.length === 0 && <Empty>No entries yet.</Empty>}
 
       {groups.map((group) => (
-        <section key={group.month} className="mb-12">
-          <h2 className="label sticky top-0 z-10 -mx-6 mb-2 bg-paper px-6 py-3">{group.month}</h2>
+        <section key={group.month} className="mb-10">
+          <h2 className="label sticky top-0 z-20 -mx-6 mb-5 bg-paper px-6 py-3">{group.month}</h2>
 
-          <div className="border-t border-rule">
-            {group.items.map((e) => (
-              <article
-                key={e.id}
-                className="grid grid-cols-[3rem_1fr] gap-x-5 border-b border-rule py-6"
-              >
-                {/* Day rail */}
-                <div className="pt-1 text-right">
-                  <span className="font-mono text-lg tabular-nums leading-none text-ink">
-                    {dayNum(e.occurred_on)}
-                  </span>
-                </div>
-
-                {/* Entry body */}
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-baseline gap-x-2 text-[13px] text-ink-faint">
-                    <Link
-                      href={`/projects/${e.projects?.slug}`}
-                      className="font-medium uppercase tracking-[0.08em] text-ink-soft hover:text-ink"
-                    >
-                      {e.projects?.name}
-                    </Link>
-                    {e.features?.name && (
-                      <>
-                        <span aria-hidden>/</span>
-                        <span className="uppercase tracking-[0.08em]">{e.features.name}</span>
-                      </>
-                    )}
-                  </div>
-
-                  <Link
-                    href={`/entries/${e.id}`}
-                    className="mt-1.5 block font-display text-xl font-medium leading-snug tracking-tight text-ink hover:underline"
-                  >
-                    {e.title}
-                  </Link>
-
-                  {(e.outcome || e.summary) && (
-                    <p className="mt-1.5 max-w-[64ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
-                      {e.outcome || e.summary}
-                    </p>
+          <div>
+            {group.items.map((e, i) => {
+              const last = i === group.items.length - 1;
+              return (
+                <article
+                  key={e.id}
+                  className="relative grid grid-cols-[2.5rem_1.5rem_1fr] items-start gap-x-3 pb-9 last:pb-0"
+                >
+                  {/* Vertical connector to the next entry */}
+                  {!last && (
+                    <span
+                      aria-hidden
+                      className="absolute left-[3.75rem] top-3 -bottom-9 w-px -translate-x-1/2 bg-rule-strong"
+                    />
                   )}
 
-                  <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-                    <SourceBadges source={e.source} />
-                    {typeof e.files_changed === "number" && e.files_changed > 0 && (
-                      <span className="label !text-ink-faint">{e.files_changed} files</span>
-                    )}
+                  {/* Day */}
+                  <time className="pt-[2px] text-right font-mono text-base tabular-nums leading-none text-ink">
+                    {dayNum(e.occurred_on)}
+                  </time>
+
+                  {/* Node on the rail */}
+                  <div className="relative z-10 flex justify-center pt-[6px]" aria-hidden>
+                    <span className="h-2.5 w-2.5 border border-ink bg-paper" />
                   </div>
-                </div>
-              </article>
-            ))}
+
+                  {/* Entry body */}
+                  <div className="min-w-0 pb-1">
+                    <div className="flex flex-wrap items-baseline gap-x-2 text-[13px] text-ink-faint">
+                      <Link
+                        href={`/projects/${e.projects?.slug}`}
+                        className="font-medium uppercase tracking-[0.08em] text-ink-soft hover:text-ink"
+                      >
+                        {e.projects?.name}
+                      </Link>
+                      {e.features?.name && (
+                        <>
+                          <span aria-hidden>/</span>
+                          <span className="uppercase tracking-[0.08em]">{e.features.name}</span>
+                        </>
+                      )}
+                    </div>
+
+                    <Link
+                      href={`/entries/${e.id}`}
+                      className="mt-1 block font-display text-xl font-medium leading-snug tracking-tight text-ink hover:underline"
+                    >
+                      {e.title}
+                    </Link>
+
+                    {(e.outcome || e.summary) && (
+                      <p className="mt-1.5 max-w-[64ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
+                        {e.outcome || e.summary}
+                      </p>
+                    )}
+
+                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                      <SourceBadges source={e.source} />
+                      {typeof e.files_changed === "number" && e.files_changed > 0 && (
+                        <span className="label !text-ink-faint">{e.files_changed} files</span>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       ))}

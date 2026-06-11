@@ -83,9 +83,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       <section>
-        <div className="mb-5 border-b border-rule pb-3">
-          <h2 className="label">Entries</h2>
-          <p className="mt-1.5 text-[14px] leading-relaxed text-ink-soft">
+        <h2 className="label mb-3">Entries</h2>
+        <div className="mb-6 bg-paper-sunk px-5 py-4">
+          <p className="label mb-1.5 !text-ink-faint">How to read this</p>
+          <p className="text-[14px] leading-relaxed text-ink-soft">
             Each entry is a decision log: what was built, why it mattered, and how it works. Open one
             for the full context, options weighed, decision, and outcome.
           </p>

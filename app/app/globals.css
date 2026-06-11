@@ -7,6 +7,7 @@
   --paper: oklch(0.985 0.002 90);
   --paper-sunk: oklch(0.965 0.002 90);
   --ink: oklch(0.18 0.004 90);
+  --ink-muted: oklch(0.31 0.006 90);
   --ink-soft: oklch(0.42 0.003 90);
   --ink-faint: oklch(0.6 0.003 90);
   --rule: oklch(0.88 0.003 90);
@@ -19,6 +20,7 @@
   --color-paper: var(--paper);
   --color-paper-sunk: var(--paper-sunk);
   --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
   --color-ink-soft: var(--ink-soft);
   --color-ink-faint: var(--ink-faint);
   --color-rule: var(--rule);

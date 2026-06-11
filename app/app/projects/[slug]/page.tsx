@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       {achievements && achievements.length > 0 && (
-        <section className="mb-12 bg-ink px-7 py-7">
+        <section className="mb-12 bg-ink-muted px-7 py-7">
           <h2 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-paper">
             <Award className="lucide h-5 w-5 text-paper/70" strokeWidth={1.5} />
             Achievements

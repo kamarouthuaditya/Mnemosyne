@@ -29,7 +29,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
 
   return (
     <article className="max-w-3xl">
-      <div className="flex flex-wrap items-center gap-x-2 text-[12px] uppercase tracking-[0.08em] text-ink-faint">
+      <div className="flex flex-wrap items-center gap-x-2 text-[13px] uppercase tracking-[0.08em] text-ink-faint">
         <span>{fmtDate(e.occurred_on)}</span>
         <span aria-hidden>/</span>
         <Link href={`/projects/${e.projects?.slug}`} className="text-ink-soft hover:text-ink">
@@ -50,7 +50,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rule pb-6">
         <SourceBadges source={e.source} />
         {e.source_ref && e.source_ref !== "manual" && (
-          <span className="font-mono text-[12px] text-ink-faint">{e.source_ref}</span>
+          <span className="font-mono text-[13px] text-ink-faint">{e.source_ref}</span>
         )}
         {e.files_changed != null && (
           <span className="label !text-ink-faint">{e.files_changed} files</span>
@@ -58,7 +58,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
       </div>
 
       {e.summary && (
-        <div className="mt-7 text-[15px]">
+        <div className="mt-7 text-[17px]">
           <Markdown>{e.summary}</Markdown>
         </div>
       )}
@@ -71,7 +71,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
             className="grid gap-x-8 gap-y-2 border-b border-rule py-7 sm:grid-cols-[180px_1fr]"
           >
             <div className="label pt-1">{f.label}</div>
-            <div className="text-[15px]">
+            <div className="text-[17px]">
               <Markdown>{e[f.key]}</Markdown>
             </div>
           </div>

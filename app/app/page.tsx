@@ -42,13 +42,13 @@ export default async function OverviewPage() {
           <em>how it was reasoned about</em>: the context, the options weighed, the decision, its
           rationale, the foresight at the time, and what actually happened.
         </p>
-        <p className="mt-4 max-w-[64ch] text-[15px] leading-relaxed text-ink-faint">
+        <p className="mt-4 max-w-[64ch] text-[17px] leading-relaxed text-ink-faint">
           Each entry self-assembles from real signals, git history, pull requests, working
           transcripts, and interview-captured reasoning, then becomes part of a durable, searchable
           memory.
         </p>
 
-        <p className="mt-8 text-[13px] text-ink-faint">
+        <p className="mt-8 text-[14px] text-ink-faint">
           Designed and built by{" "}
           <span className="font-medium text-ink">Aditya Kamarouthu</span>, sole creator.
         </p>
@@ -66,7 +66,7 @@ export default async function OverviewPage() {
       <section className="mt-14">
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="label">Projects</h2>
-          <Link href="/timeline" className="text-[13px] font-medium text-ink-soft hover:text-ink">
+          <Link href="/timeline" className="text-[14px] font-medium text-ink-soft hover:text-ink">
             View timeline →
           </Link>
         </div>
@@ -85,7 +85,7 @@ export default async function OverviewPage() {
                 href={`/projects/${p.slug}`}
                 className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 border-b border-rule py-6 transition-colors hover:bg-paper-sunk"
               >
-                <span className="font-mono text-[13px] tabular-nums text-ink-faint">
+                <span className="font-mono text-[14px] tabular-nums text-ink-faint">
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
@@ -97,17 +97,17 @@ export default async function OverviewPage() {
                     <span className="label shrink-0">{p.status}</span>
                   </div>
                   {p.description && (
-                    <p className="mt-2 max-w-[70ch] text-[14px] leading-relaxed text-ink-soft line-clamp-2">
+                    <p className="mt-2 max-w-[70ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
                       {p.description}
                     </p>
                   )}
                 </div>
 
                 <div className="hidden text-right sm:block">
-                  <p className="font-mono text-[15px] tabular-nums text-ink">{p.entries}</p>
+                  <p className="font-mono text-[17px] tabular-nums text-ink">{p.entries}</p>
                   <p className="label mt-0.5">{p.entries === 1 ? "entry" : "entries"}</p>
                   {p.last && (
-                    <p className="mt-2 text-[12px] text-ink-faint">last {fmtDate(p.last)}</p>
+                    <p className="mt-2 text-[13px] text-ink-faint">last {fmtDate(p.last)}</p>
                   )}
                 </div>
               </Link>

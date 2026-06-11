@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               >
                 <div className="font-display text-lg font-medium text-ink">{f.name}</div>
                 {f.description && (
-                  <p className="mt-1 line-clamp-2 text-[14px] text-ink-soft">{f.description}</p>
+                  <p className="mt-1 line-clamp-2 text-[16px] text-ink-soft">{f.description}</p>
                 )}
               </Link>
             ))}
@@ -67,7 +67,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             {achievements.map((a) => (
               <li key={a.id} className="border-b border-rule py-4">
                 <div className="font-medium text-ink">{a.title}</div>
-                {a.impact && <p className="mt-0.5 text-[14px] text-ink-soft">{a.impact}</p>}
+                {a.impact && <p className="mt-0.5 text-[16px] text-ink-soft">{a.impact}</p>}
               </li>
             ))}
           </ul>
@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               key={e.id}
               className="grid grid-cols-[6.5rem_1fr] gap-x-5 border-b border-rule py-5"
             >
-              <div className="pt-0.5 text-[12px] uppercase tracking-[0.06em] text-ink-faint">
+              <div className="pt-0.5 text-[13px] uppercase tracking-[0.06em] text-ink-faint">
                 {fmtDate(e.occurred_on)}
               </div>
               <div className="min-w-0">
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   {e.title}
                 </Link>
                 {e.outcome && (
-                  <p className="mt-1 max-w-[64ch] text-[14px] text-ink-soft line-clamp-2">
+                  <p className="mt-1 max-w-[64ch] text-[16px] text-ink-soft line-clamp-2">
                     {e.outcome}
                   </p>
                 )}

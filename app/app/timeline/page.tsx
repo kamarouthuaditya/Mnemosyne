@@ -60,7 +60,7 @@ export default async function TimelinePage() {
 
                 {/* Entry body */}
                 <div className="min-w-0">
-                  <div className="flex flex-wrap items-baseline gap-x-2 text-[12px] text-ink-faint">
+                  <div className="flex flex-wrap items-baseline gap-x-2 text-[13px] text-ink-faint">
                     <Link
                       href={`/projects/${e.projects?.slug}`}
                       className="font-medium uppercase tracking-[0.08em] text-ink-soft hover:text-ink"
@@ -83,7 +83,7 @@ export default async function TimelinePage() {
                   </Link>
 
                   {(e.outcome || e.summary) && (
-                    <p className="mt-1.5 max-w-[64ch] text-[14px] leading-relaxed text-ink-soft line-clamp-2">
+                    <p className="mt-1.5 max-w-[64ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
                       {e.outcome || e.summary}
                     </p>
                   )}

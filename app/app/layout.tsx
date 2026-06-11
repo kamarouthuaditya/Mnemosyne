@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link
                   key={n.href}
                   href={n.href}
-                  className="text-[13px] font-medium text-ink-soft transition-colors hover:text-ink"
+                  className="text-[14px] font-medium text-ink-soft transition-colors hover:text-ink"
                 >
                   {n.label}
                 </Link>
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="mt-24 border-t border-rule">
           <div className="mx-auto flex max-w-5xl flex-col gap-1 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="label">Mnemosyne</p>
-            <p className="text-[13px] text-ink-faint">
+            <p className="text-[14px] text-ink-faint">
               Designed and built by{" "}
               <span className="font-medium text-ink-soft">Aditya Kamarouthu</span>. Sole creator.
             </p>

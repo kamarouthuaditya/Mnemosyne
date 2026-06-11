@@ -36,12 +36,12 @@ export default async function AchievementsPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="font-display text-lg font-medium text-ink">{a.title}</div>
                     {a.occurred_on && (
-                      <span className="shrink-0 text-[12px] uppercase tracking-[0.06em] text-ink-faint">
+                      <span className="shrink-0 text-[13px] uppercase tracking-[0.06em] text-ink-faint">
                         {fmtDate(a.occurred_on)}
                       </span>
                     )}
                   </div>
-                  {a.impact && <p className="mt-1 text-[14px] text-ink-soft">{a.impact}</p>}
+                  {a.impact && <p className="mt-1 text-[16px] text-ink-soft">{a.impact}</p>}
                   {a.description && (
                     <div className="mt-1">
                       <Markdown>{a.description}</Markdown>

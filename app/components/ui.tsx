@@ -8,7 +8,7 @@ export function PageTitle({ title, subtitle }: { title: string; subtitle?: strin
         {title}
       </h1>
       {subtitle && (
-        <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-soft">{subtitle}</p>
+        <p className="mt-3 max-w-[60ch] text-[17px] leading-relaxed text-ink-soft">{subtitle}</p>
       )}
     </div>
   );
@@ -53,10 +53,10 @@ export function NotConfigured() {
   return (
     <div className="mb-10 border border-ink/20 bg-paper-sunk p-6">
       <p className="label !text-ink">Supabase not configured</p>
-      <p className="mt-2 max-w-[60ch] text-[14px] leading-relaxed text-ink-soft">
-        Set <code className="bg-ink/10 px-1 font-mono text-[13px]">NEXT_PUBLIC_SUPABASE_URL</code>{" "}
-        and <code className="bg-ink/10 px-1 font-mono text-[13px]">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>{" "}
-        in <code className="bg-ink/10 px-1 font-mono text-[13px]">app/.env.local</code> (local) or
+      <p className="mt-2 max-w-[60ch] text-[16px] leading-relaxed text-ink-soft">
+        Set <code className="bg-ink/10 px-1 font-mono text-[14px]">NEXT_PUBLIC_SUPABASE_URL</code>{" "}
+        and <code className="bg-ink/10 px-1 font-mono text-[14px]">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>{" "}
+        in <code className="bg-ink/10 px-1 font-mono text-[14px]">app/.env.local</code> (local) or
         the Vercel project environment, then rebuild.
       </p>
     </div>
@@ -65,7 +65,7 @@ export function NotConfigured() {
 
 export function Empty({ children }: { children: React.ReactNode }) {
   return (
-    <p className="border border-dashed border-rule px-6 py-10 text-center text-[14px] text-ink-faint">
+    <p className="border border-dashed border-rule px-6 py-10 text-center text-[16px] text-ink-faint">
       {children}
     </p>
   );

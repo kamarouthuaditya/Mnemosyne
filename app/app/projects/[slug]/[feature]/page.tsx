@@ -52,7 +52,7 @@ export default async function FeaturePage({
             key={e.id}
             className="grid grid-cols-[6.5rem_1fr] gap-x-5 border-b border-rule py-5"
           >
-            <div className="pt-0.5 text-[12px] uppercase tracking-[0.06em] text-ink-faint">
+            <div className="pt-0.5 text-[13px] uppercase tracking-[0.06em] text-ink-faint">
               {fmtDate(e.occurred_on)}
             </div>
             <div className="min-w-0">
@@ -63,7 +63,7 @@ export default async function FeaturePage({
                 {e.title}
               </Link>
               {e.outcome && (
-                <p className="mt-1 max-w-[64ch] text-[14px] text-ink-soft line-clamp-2">
+                <p className="mt-1 max-w-[64ch] text-[16px] text-ink-soft line-clamp-2">
                   {e.outcome}
                 </p>
               )}

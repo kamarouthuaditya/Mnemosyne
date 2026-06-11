@@ -28,7 +28,7 @@ export default async function WeeklyPage() {
               {fmtDate(r.week_start)} to {fmtDate(r.week_end)}
             </div>
             {r.highlights && r.highlights.length > 0 && (
-              <ul className="mt-4 list-disc space-y-1.5 pl-5 text-[14px] text-ink-soft marker:text-ink-faint">
+              <ul className="mt-4 list-disc space-y-1.5 pl-5 text-[16px] text-ink-soft marker:text-ink-faint">
                 {r.highlights.map((h: string, i: number) => (
                   <li key={i}>{h}</li>
                 ))}

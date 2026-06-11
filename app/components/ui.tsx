@@ -26,13 +26,13 @@ export function Card({ children, href }: { children: React.ReactNode; href?: str
   );
 }
 
-/** Sources render as monochrome uppercase labels, differentiated by weight not hue. */
+/** Sources render as monochrome boxed chips, differentiated by weight not hue. */
 export function SourceBadges({ source }: { source: string[] }) {
   if (!source?.length) return null;
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <div className="flex flex-wrap items-center gap-2">
       {source.map((s) => (
-        <span key={s} className="label !text-ink-faint">
+        <span key={s} className="chip">
           {s}
         </span>
       ))}

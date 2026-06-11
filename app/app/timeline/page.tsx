@@ -51,7 +51,7 @@ export default async function TimelinePage() {
               return (
                 <article
                   key={e.id}
-                  className="grid grid-cols-[2.5rem_1.25rem_1fr] items-start gap-x-3 pb-9 last:pb-0"
+                  className="grid grid-cols-[2.5rem_1.25rem_1fr] items-start gap-x-3 pb-7 last:pb-0"
                 >
                   {/* Day */}
                   <time className="pt-px text-right font-mono text-base tabular-nums leading-none text-ink">
@@ -61,45 +61,46 @@ export default async function TimelinePage() {
                   {/* Rail: connector line + node, both centered on the same axis */}
                   <div className="relative flex justify-center self-stretch" aria-hidden>
                     {!last && (
-                      <span className="absolute left-1/2 top-1 bottom-[-2.25rem] w-px -translate-x-1/2 bg-rule-strong" />
+                      <span className="absolute left-1/2 top-1 bottom-[-2rem] w-px -translate-x-1/2 bg-rule-strong" />
                     )}
                     <span className="relative z-10 mt-[5px] h-2.5 w-2.5 bg-ink ring-4 ring-paper" />
                   </div>
 
                   {/* Entry body */}
-                  <div className="min-w-0 pb-1">
-                    <div className="flex flex-wrap items-baseline gap-x-2 text-[13px] text-ink-faint">
+                  <div className={`min-w-0 ${last ? "" : "border-b border-rule pb-7"}`}>
+                    {/* Source line: project / feature */}
+                    <div className="flex flex-wrap items-center gap-x-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-ink-faint">
                       <Link
                         href={`/projects/${e.projects?.slug}`}
-                        className="font-medium uppercase tracking-[0.08em] text-ink-soft hover:text-ink"
+                        className="text-ink-soft hover:text-ink"
                       >
                         {e.projects?.name}
                       </Link>
                       {e.features?.name && (
                         <>
-                          <span aria-hidden>/</span>
-                          <span className="uppercase tracking-[0.08em]">{e.features.name}</span>
+                          <span aria-hidden className="text-rule-strong">/</span>
+                          <span>{e.features.name}</span>
                         </>
                       )}
                     </div>
 
                     <Link
                       href={`/entries/${e.id}`}
-                      className="mt-1 block font-display text-xl font-medium leading-snug tracking-tight text-ink hover:underline"
+                      className="mt-2 block font-display text-2xl font-medium leading-snug tracking-tight text-ink hover:underline"
                     >
                       {e.title}
                     </Link>
 
                     {(e.outcome || e.summary) && (
-                      <p className="mt-1.5 max-w-[64ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
+                      <p className="mt-2 max-w-[68ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
                         {e.outcome || e.summary}
                       </p>
                     )}
 
-                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                       <SourceBadges source={e.source} />
                       {typeof e.files_changed === "number" && e.files_changed > 0 && (
-                        <span className="label !text-ink-faint">{e.files_changed} files</span>
+                        <span className="chip chip-faint">{e.files_changed} files</span>
                       )}
                     </div>
                   </div>

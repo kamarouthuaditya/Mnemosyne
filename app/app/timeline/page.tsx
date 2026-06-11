@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ScrollText } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate, stripMd } from "@/components/ui";
 
@@ -41,7 +40,6 @@ export default async function TimelinePage() {
       <PageTitle
         title="Timeline"
         subtitle="Every entry, most recent first. The full working record."
-        icon={<ScrollText className="lucide h-8 w-8 text-ink-soft" strokeWidth={1.5} />}
       />
       <NotConfigured />
       {supabase && entries.length === 0 && <Empty>No entries yet.</Empty>}

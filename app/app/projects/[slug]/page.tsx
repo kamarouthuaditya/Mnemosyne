@@ -73,7 +73,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {features && features.length > 0 && (
         <section className="mb-12">
           <h2 className="label mb-4 flex items-center gap-2">
-            <Component className="lucide h-4 w-4 text-ink-soft" strokeWidth={1.5} />
+            <Component className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
             Features
           </h2>
           <div className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
@@ -96,7 +96,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {achievements && achievements.length > 0 && (
         <section className="mb-12">
           <h2 className="label mb-4 flex items-center gap-2">
-            <Award className="lucide h-4 w-4 text-ink-soft" strokeWidth={1.5} />
+            <Award className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
             Achievements
           </h2>
           <ul className="border-t border-rule">
@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <section id="entries" className="scroll-mt-8">
         <h2 className="label mb-5 flex items-center gap-2">
-          <ScrollText className="lucide h-4 w-4 text-ink-soft" strokeWidth={1.5} />
+          <ScrollText className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
           Entries
         </h2>
         {(!entries || entries.length === 0) && <Empty>No entries yet.</Empty>}

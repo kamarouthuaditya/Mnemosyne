@@ -29,6 +29,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <div>
+      <nav className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.1em]">
+        <Link href="/" className="text-ink-faint transition-colors hover:text-ink">
+          Projects
+        </Link>
+        <span className="text-rule-strong">/</span>
+        <span className="text-ink-soft">{project.name}</span>
+      </nav>
+
       <PageTitle title={project.name} />
       <div className="-mt-6 mb-8 flex flex-wrap items-center gap-2">
         <Tag>{project.status}</Tag>
@@ -75,7 +83,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       <section>
-        <h2 className="label mb-4">Timeline</h2>
+        <div className="mb-5 border-b border-rule pb-3">
+          <h2 className="label">Entries</h2>
+          <p className="mt-1.5 max-w-[68ch] text-[14px] leading-relaxed text-ink-soft">
+            Each entry is a decision log: what was built, why it mattered, and how it works. Open one
+            for the full context, options weighed, decision, and outcome.
+          </p>
+        </div>
         {(!entries || entries.length === 0) && <Empty>No entries yet.</Empty>}
         <div className="border-t border-rule">
           {entries?.map((e) => (

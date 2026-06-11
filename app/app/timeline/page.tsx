@@ -92,7 +92,7 @@ export default async function TimelinePage() {
                     </Link>
 
                     {(e.outcome || e.summary) && (
-                      <p className="mt-2 max-w-[68ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
+                      <p className="mt-2 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
                         {e.outcome || e.summary}
                       </p>
                     )}

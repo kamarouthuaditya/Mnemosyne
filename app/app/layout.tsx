@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Work Memory",
+  title: "Mnemosyne",
   description: "Career memory — what I built and how I thought about it.",
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="border-b border-white/10">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
             <Link href="/" className="text-sm font-semibold tracking-tight">
-              work·memory
+              mnemosyne
             </Link>
             <nav className="flex gap-5 text-sm text-white/60">
               {nav.map((n) => (

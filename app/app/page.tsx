@@ -37,12 +37,12 @@ export default async function OverviewPage() {
         <h1 className="mt-5 max-w-[16ch] font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-7xl">
           Mnemosyne
         </h1>
-        <p className="mt-7 max-w-[64ch] text-lg leading-relaxed text-ink-soft">
+        <p className="mt-7 text-justify text-lg leading-relaxed text-ink-soft [hyphens:auto]">
           A record of engineering judgment over time. Not just <em>what</em> was built, but{" "}
           <em>how it was reasoned about</em>: the context, the options weighed, the decision, its
           rationale, the foresight at the time, and what actually happened.
         </p>
-        <p className="mt-4 max-w-[64ch] text-[17px] leading-relaxed text-ink-faint">
+        <p className="mt-4 text-justify text-[17px] leading-relaxed text-ink-faint [hyphens:auto]">
           Each entry self-assembles from real signals, git history, pull requests, working
           transcripts, and interview-captured reasoning, then becomes part of a durable, searchable
           memory.
@@ -97,7 +97,7 @@ export default async function OverviewPage() {
                     <span className="label shrink-0">{p.status}</span>
                   </div>
                   {p.description && (
-                    <p className="mt-2 max-w-[70ch] text-[16px] leading-relaxed text-ink-soft line-clamp-2">
+                    <p className="mt-2 text-[16px] leading-relaxed text-ink-soft line-clamp-2">
                       {p.description}
                     </p>
                   )}

@@ -145,32 +145,43 @@ export default async function OverviewPage() {
             </Link>
           </div>
 
-          <div className="border-t border-rule">
-            {recent.map((e) => (
-              <Link
-                key={e.id}
-                href={`/entries/${e.id}`}
-                className="group grid grid-cols-[7rem_1fr] items-baseline gap-x-5 border-b border-rule py-4 transition-colors hover:bg-paper-sunk sm:grid-cols-[8rem_1fr_auto]"
-              >
-                <time className="text-[13px] uppercase tracking-[0.06em] text-ink-faint">
-                  {fmtDate(e.occurred_on)}
-                </time>
+          <div className="border-t border-rule pt-5">
+            {recent.map((e, i) => {
+              const last = i === recent.length - 1;
+              return (
+                <Link
+                  key={e.id}
+                  href={`/entries/${e.id}`}
+                  className="group grid grid-cols-[5.5rem_1.25rem_1fr] items-start gap-x-4 py-3.5 transition-colors hover:bg-paper-sunk sm:grid-cols-[7rem_1.25rem_1fr_auto]"
+                >
+                  <time className="pt-px text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                    {fmtDate(e.occurred_on)}
+                  </time>
 
-                <div className="min-w-0">
-                  <span className="label !text-ink-faint">
-                    {e.projects?.name}
-                    {e.features?.name ? ` / ${e.features.name}` : ""}
-                  </span>
-                  <p className="mt-1 truncate font-display text-lg font-medium text-ink group-hover:underline">
-                    {e.title}
-                  </p>
-                </div>
+                  {/* connector rail */}
+                  <div className="relative flex justify-center self-stretch" aria-hidden>
+                    {!last && (
+                      <span className="absolute left-1/2 top-2 bottom-[-1.75rem] w-px -translate-x-1/2 bg-rule-strong" />
+                    )}
+                    <span className="relative z-10 mt-[5px] h-2.5 w-2.5 bg-ink ring-4 ring-paper" />
+                  </div>
 
-                <div className="hidden sm:block">
-                  <SourceBadges source={e.source} />
-                </div>
-              </Link>
-            ))}
+                  <div className="min-w-0">
+                    <span className="label !text-ink-faint">
+                      {e.projects?.name}
+                      {e.features?.name ? ` / ${e.features.name}` : ""}
+                    </span>
+                    <p className="mt-1 truncate font-display text-lg font-medium text-ink group-hover:underline">
+                      {e.title}
+                    </p>
+                  </div>
+
+                  <div className="hidden sm:block">
+                    <SourceBadges source={e.source} />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

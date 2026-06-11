@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {features && features.length > 0 && (
         <section className="mb-12">
-          <h2 className="label mb-4 flex items-center gap-2">
+          <h2 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-ink">
             <Component className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
             Features
           </h2>
@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {achievements && achievements.length > 0 && (
         <section className="mb-12">
-          <h2 className="label mb-4 flex items-center gap-2">
+          <h2 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-ink">
             <Award className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
             Achievements
           </h2>
@@ -111,7 +111,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       <section id="entries" className="scroll-mt-8">
-        <h2 className="label mb-5 flex items-center gap-2">
+        <h2 className="mb-5 flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-ink">
           <ScrollText className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
           Entries
         </h2>

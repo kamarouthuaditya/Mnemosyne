@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { ScrollText } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Project } from "@/lib/types";
-import { Empty, NotConfigured, fmtDate, excerpt } from "@/components/ui";
+import { Empty, NotConfigured, SourceBadges, fmtDate, excerpt } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,16 @@ export default async function OverviewPage() {
       entries: p.work_entries?.length ?? 0,
       last: p.work_entries?.map((e: any) => e.occurred_on).sort().at(-1) ?? null,
     }));
+  }
+
+  let recent: any[] = [];
+  if (supabase) {
+    const { data } = await supabase
+      .from("work_entries")
+      .select("id, occurred_on, title, source, projects(name, slug), features(name)")
+      .order("occurred_on", { ascending: false })
+      .limit(6);
+    recent = data ?? [];
   }
 
   const totalEntries = projects.reduce((n, p) => n + p.entries, 0);
@@ -117,6 +128,52 @@ export default async function OverviewPage() {
           </div>
         )}
       </section>
+
+      {/* Recent activity — timeline overview */}
+      {recent.length > 0 && (
+        <section className="mt-16">
+          <div className="mb-6 flex items-baseline justify-between">
+            <h2 className="flex items-center gap-2.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-ink">
+              <ScrollText className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
+              Recent activity
+            </h2>
+            <Link
+              href="/timeline"
+              className="text-[13px] font-medium text-ink-soft hover:text-ink"
+            >
+              Full timeline →
+            </Link>
+          </div>
+
+          <div className="border-t border-rule">
+            {recent.map((e) => (
+              <Link
+                key={e.id}
+                href={`/entries/${e.id}`}
+                className="group grid grid-cols-[7rem_1fr] items-baseline gap-x-5 border-b border-rule py-4 transition-colors hover:bg-paper-sunk sm:grid-cols-[8rem_1fr_auto]"
+              >
+                <time className="text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                  {fmtDate(e.occurred_on)}
+                </time>
+
+                <div className="min-w-0">
+                  <span className="label !text-ink-faint">
+                    {e.projects?.name}
+                    {e.features?.name ? ` / ${e.features.name}` : ""}
+                  </span>
+                  <p className="mt-1 truncate font-display text-lg font-medium text-ink group-hover:underline">
+                    {e.title}
+                  </p>
+                </div>
+
+                <div className="hidden sm:block">
+                  <SourceBadges source={e.source} />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

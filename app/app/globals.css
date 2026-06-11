@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: #0a0a0b;
+  color: #e7e7ea;
+  font-feature-settings: "ss01";
+}

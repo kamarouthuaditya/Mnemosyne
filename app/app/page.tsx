@@ -152,9 +152,9 @@ export default async function OverviewPage() {
                 <Link
                   key={e.id}
                   href={`/entries/${e.id}`}
-                  className="group grid grid-cols-[5.5rem_1.25rem_1fr] items-start gap-x-4 py-3.5 transition-colors hover:bg-paper-sunk sm:grid-cols-[7rem_1.25rem_1fr_auto]"
+                  className="group grid grid-cols-[6rem_1.25rem_minmax(0,1fr)] items-start gap-x-4 py-3.5 transition-colors hover:bg-paper-sunk sm:grid-cols-[7rem_1.25rem_minmax(0,1fr)_auto]"
                 >
-                  <time className="pt-px text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                  <time className="whitespace-nowrap pt-px text-[13px] uppercase tracking-[0.06em] text-ink-faint">
                     {fmtDate(e.occurred_on)}
                   </time>
 
@@ -171,7 +171,7 @@ export default async function OverviewPage() {
                       {e.projects?.name}
                       {e.features?.name ? ` / ${e.features.name}` : ""}
                     </span>
-                    <p className="mt-1 truncate font-display text-lg font-medium text-ink group-hover:underline">
+                    <p className="mt-1 break-words font-display text-lg font-medium leading-snug text-ink group-hover:underline">
                       {e.title}
                     </p>
                   </div>

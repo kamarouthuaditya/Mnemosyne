@@ -36,7 +36,7 @@ export default async function TimelinePage() {
   }
 
   return (
-    <div className="max-w-3xl">
+    <div>
       <PageTitle title="Timeline" subtitle="Every entry, most recent first. The full working record." />
       <NotConfigured />
       {supabase && entries.length === 0 && <Empty>No entries yet.</Empty>}
@@ -51,24 +51,19 @@ export default async function TimelinePage() {
               return (
                 <article
                   key={e.id}
-                  className="relative grid grid-cols-[2.5rem_1.5rem_1fr] items-start gap-x-3 pb-9 last:pb-0"
+                  className="grid grid-cols-[2.5rem_1.25rem_1fr] items-start gap-x-3 pb-9 last:pb-0"
                 >
-                  {/* Vertical connector to the next entry */}
-                  {!last && (
-                    <span
-                      aria-hidden
-                      className="absolute left-[3.75rem] top-3 -bottom-9 w-px -translate-x-1/2 bg-rule-strong"
-                    />
-                  )}
-
                   {/* Day */}
-                  <time className="pt-[2px] text-right font-mono text-base tabular-nums leading-none text-ink">
+                  <time className="pt-px text-right font-mono text-base tabular-nums leading-none text-ink">
                     {dayNum(e.occurred_on)}
                   </time>
 
-                  {/* Node on the rail */}
-                  <div className="relative z-10 flex justify-center pt-[6px]" aria-hidden>
-                    <span className="h-2.5 w-2.5 border border-ink bg-paper" />
+                  {/* Rail: connector line + node, both centered on the same axis */}
+                  <div className="relative flex justify-center self-stretch" aria-hidden>
+                    {!last && (
+                      <span className="absolute left-1/2 top-1 bottom-[-2.25rem] w-px -translate-x-1/2 bg-rule-strong" />
+                    )}
+                    <span className="relative z-10 mt-[5px] h-2.5 w-2.5 bg-ink ring-4 ring-paper" />
                   </div>
 
                   {/* Entry body */}

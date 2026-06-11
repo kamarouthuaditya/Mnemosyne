@@ -28,7 +28,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
   if (!e) notFound();
 
   return (
-    <article className="max-w-3xl">
+    <article>
       <div className="flex flex-wrap items-center gap-x-2 text-[13px] uppercase tracking-[0.08em] text-ink-faint">
         <span>{fmtDate(e.occurred_on)}</span>
         <span aria-hidden>/</span>

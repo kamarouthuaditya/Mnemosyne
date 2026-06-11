@@ -37,10 +37,10 @@ export default async function AchievementsPage() {
             <ul className="border-t border-rule">
               {items.map((a) => (
                 <li key={a.id} className="border-b border-rule py-5">
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                     <div className="font-display text-lg font-medium text-ink">{a.title}</div>
                     {a.occurred_on && (
-                      <span className="shrink-0 text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                      <span className="shrink-0 text-[13px] uppercase tracking-[0.06em] text-ink-faint sm:order-last">
                         {fmtDate(a.occurred_on)}
                       </span>
                     )}

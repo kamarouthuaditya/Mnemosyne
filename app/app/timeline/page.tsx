@@ -46,7 +46,9 @@ export default async function TimelinePage() {
 
       {groups.map((group) => (
         <section key={group.month} className="mb-10">
-          <h2 className="label sticky top-0 z-20 -mx-6 mb-5 bg-paper px-6 py-3">{group.month}</h2>
+          <h2 className="label sticky top-0 z-20 -mx-4 mb-5 bg-paper px-4 py-3 sm:-mx-6 sm:px-6">
+            {group.month}
+          </h2>
 
           <div>
             {group.items.map((e, i) => {
@@ -95,7 +97,7 @@ export default async function TimelinePage() {
                     </Link>
 
                     {(e.outcome || e.summary) && (
-                      <p className="mt-2 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
+                      <p className="mt-2 text-left text-[16px] leading-relaxed text-ink-soft [hyphens:auto] sm:text-justify">
                         {stripMd(e.outcome || e.summary)}
                       </p>
                     )}

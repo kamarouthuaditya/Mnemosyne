@@ -48,14 +48,14 @@ export default async function OverviewPage() {
         <h1 className="mt-5 max-w-[16ch] font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-7xl">
           Mnemosyne
         </h1>
-        <p className="mt-7 text-justify text-lg leading-relaxed text-ink-soft [hyphens:auto]">
+        <p className="mt-7 text-left text-lg leading-relaxed text-ink-soft [hyphens:auto] sm:text-justify">
           A record of engineering judgment over time. Not just{" "}
           <strong className="font-semibold text-ink">what</strong> was built, but{" "}
           <strong className="font-semibold text-ink">how it was reasoned about</strong>: the context,
           the options weighed, the decision, its rationale, the foresight at the time, and what
           actually happened.
         </p>
-        <p className="mt-4 text-justify text-[17px] leading-relaxed text-ink-faint [hyphens:auto]">
+        <p className="mt-4 text-left text-[17px] leading-relaxed text-ink-faint [hyphens:auto] sm:text-justify">
           Each entry self-assembles from real signals, git history, pull requests, working
           transcripts, and interview-captured reasoning, then becomes part of a durable, searchable
           memory.
@@ -67,7 +67,7 @@ export default async function OverviewPage() {
         </p>
 
         {projects.length > 0 && (
-          <dl className="mt-10 grid grid-cols-3 divide-x divide-rule border-t border-rule pt-6">
+          <dl className="mt-10 grid grid-cols-1 divide-y divide-rule border-t border-rule pt-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             <Stat n={projects.length} label="Projects" />
             <Stat n={totalEntries} label="Decision logs" />
             {earliest && <Stat n={fmtDate(earliest)} label="Since" />}
@@ -191,7 +191,7 @@ export default async function OverviewPage() {
 
 function Stat({ n, label }: { n: number | string; label: string }) {
   return (
-    <div className="flex flex-col justify-center px-8 py-1.5 first:pl-0">
+    <div className="flex flex-col justify-center py-4 first:pt-0 sm:px-8 sm:py-1.5 sm:first:pl-0 sm:first:pt-1.5">
       <dd className="font-display text-3xl font-medium leading-none tabular-nums text-ink">{n}</dd>
       <dt className="label mt-2">{label}</dt>
     </div>

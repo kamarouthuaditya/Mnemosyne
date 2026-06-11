@@ -14,7 +14,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-6">
+    <nav className="flex flex-wrap gap-x-5 gap-y-1.5 sm:gap-6">
       {links.map((n) => {
         const active = n.href === "/" ? pathname === "/" : pathname.startsWith(n.href);
         return (

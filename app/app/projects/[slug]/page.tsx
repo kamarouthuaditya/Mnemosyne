@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen, ScrollText, ArrowDown, Component, Award } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Card, Empty, NotConfigured, PageTitle, SourceBadges, Tag, fmtDate } from "@/components/ui";
+import { Card, Empty, NotConfigured, PageTitle, SourceBadges, Tag, fmtDate, stripMd } from "@/components/ui";
 import Markdown from "@/components/Markdown";
 
 export const dynamic = "force-dynamic";
@@ -85,7 +85,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               >
                 <div className="font-display text-lg font-medium text-ink">{f.name}</div>
                 {f.description && (
-                  <p className="mt-1 line-clamp-2 text-[16px] text-ink-soft">{f.description}</p>
+                  <p className="mt-1 line-clamp-2 text-[16px] text-ink-soft">
+                    {stripMd(f.description)}
+                  </p>
                 )}
               </Link>
             ))}
@@ -104,7 +106,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <li key={a.id} className="border-b border-paper/15 py-4 last:border-b-0">
                 <div className="font-medium text-paper">{a.title}</div>
                 {a.impact && (
-                  <p className="mt-1 text-[16px] leading-relaxed text-paper/70">{a.impact}</p>
+                  <p className="mt-1 text-[16px] leading-relaxed text-paper/70">
+                    {stripMd(a.impact)}
+                  </p>
                 )}
               </li>
             ))}
@@ -139,7 +143,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </Link>
                 {e.outcome && (
                   <p className="mt-1 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
-                    {e.outcome}
+                    {stripMd(e.outcome)}
                   </p>
                 )}
                 <div className="mt-2">

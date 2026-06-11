@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { Project } from "@/lib/types";
-import { Empty, NotConfigured, fmtDate } from "@/components/ui";
+import { Empty, NotConfigured, fmtDate, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -98,7 +98,7 @@ export default async function OverviewPage() {
                   </div>
                   {p.description && (
                     <p className="mt-2 text-[16px] leading-relaxed text-ink-soft line-clamp-2">
-                      {p.description}
+                      {stripMd(p.description)}
                     </p>
                   )}
                 </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate } from "@/components/ui";
+import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +44,7 @@ export default async function FeaturePage({
           {project.name} /
         </Link>
       </div>
-      <PageTitle title={feat.name} subtitle={feat.description ?? undefined} />
+      <PageTitle title={feat.name} subtitle={feat.description ? stripMd(feat.description) : undefined} />
       {(!entries || entries.length === 0) && <Empty>No entries for this feature yet.</Empty>}
       <div className="border-t border-rule">
         {entries?.map((e) => (
@@ -64,7 +64,7 @@ export default async function FeaturePage({
               </Link>
               {e.outcome && (
                 <p className="mt-1 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
-                  {e.outcome}
+                  {stripMd(e.outcome)}
                 </p>
               )}
               <div className="mt-2">

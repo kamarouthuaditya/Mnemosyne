@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ScrollText } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate } from "@/components/ui";
+import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -98,7 +98,7 @@ export default async function TimelinePage() {
 
                     {(e.outcome || e.summary) && (
                       <p className="mt-2 text-justify text-[16px] leading-relaxed text-ink-soft [hyphens:auto]">
-                        {e.outcome || e.summary}
+                        {stripMd(e.outcome || e.summary)}
                       </p>
                     )}
 

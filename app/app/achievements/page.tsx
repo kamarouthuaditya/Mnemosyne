@@ -1,6 +1,6 @@
 import { Award, Folder } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Empty, NotConfigured, PageTitle, Tag, fmtDate } from "@/components/ui";
+import { Empty, NotConfigured, PageTitle, Tag, fmtDate, stripMd } from "@/components/ui";
 import Markdown from "@/components/Markdown";
 
 export const dynamic = "force-dynamic";
@@ -49,7 +49,7 @@ export default async function AchievementsPage() {
                       </span>
                     )}
                   </div>
-                  {a.impact && <p className="mt-1 text-[16px] text-ink-soft">{a.impact}</p>}
+                  {a.impact && <p className="mt-1 text-[16px] text-ink-soft">{stripMd(a.impact)}</p>}
                   {a.description && (
                     <div className="mt-1">
                       <Markdown>{a.description}</Markdown>

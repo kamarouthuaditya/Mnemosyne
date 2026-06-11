@@ -80,6 +80,22 @@ export function Empty({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Flatten markdown to plain text for previews (ledger rows, line-clamped summaries). */
+export function stripMd(md: string | null): string {
+  if (!md) return "";
+  return md
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "") // images
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // links -> text
+    .replace(/`([^`]+)`/g, "$1") // inline code
+    .replace(/(\*\*|__)(.*?)\1/g, "$2") // bold
+    .replace(/(\*|_)(.*?)\1/g, "$2") // italic
+    .replace(/^#{1,6}\s+/gm, "") // headings
+    .replace(/^>\s?/gm, "") // blockquotes
+    .replace(/\r?\n+/g, " ") // newlines
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function fmtDate(d: string | null) {
   if (!d) return "";
   return new Date(d + "T00:00:00").toLocaleDateString("en-US", {

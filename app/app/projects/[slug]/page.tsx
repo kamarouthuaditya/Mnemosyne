@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, ScrollText, ArrowDown } from "lucide-react";
+import { BookOpen, ScrollText, ArrowDown, Component, Award } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Card, Empty, NotConfigured, PageTitle, SourceBadges, Tag, fmtDate } from "@/components/ui";
 import Markdown from "@/components/Markdown";
@@ -72,7 +72,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {features && features.length > 0 && (
         <section className="mb-12">
-          <h2 className="label mb-4">Features</h2>
+          <h2 className="label mb-4 flex items-center gap-2">
+            <Component className="lucide h-4 w-4 text-ink-soft" strokeWidth={1.5} />
+            Features
+          </h2>
           <div className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
             {features.map((f) => (
               <Link
@@ -92,7 +95,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {achievements && achievements.length > 0 && (
         <section className="mb-12">
-          <h2 className="label mb-4">Achievements</h2>
+          <h2 className="label mb-4 flex items-center gap-2">
+            <Award className="lucide h-4 w-4 text-ink-soft" strokeWidth={1.5} />
+            Achievements
+          </h2>
           <ul className="border-t border-rule">
             {achievements.map((a) => (
               <li key={a.id} className="border-b border-rule py-4">

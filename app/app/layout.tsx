@@ -22,10 +22,26 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+const TITLE = "Mnemosyne";
+const DESCRIPTION =
+  "An archive of decisions, not just outcomes. The reasoning behind what Aditya Kamarouthu builds, captured over time.";
+
 export const metadata: Metadata = {
-  title: "Mnemosyne",
-  description:
-    "A career memory. Not just what Aditya Kamarouthu built, but how he reasoned about it.",
+  metadataBase: new URL("https://mnemosyne-six.vercel.app"),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "https://mnemosyne-six.vercel.app",
+    siteName: TITLE,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -39,6 +39,16 @@ body {
   font-feature-settings: "ss01";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* keep editable fields selectable */
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .font-display {
@@ -79,4 +89,14 @@ body {
 svg.lucide {
   stroke-linecap: square;
   stroke-linejoin: miter;
+}
+
+/* indeterminate sweep for the route-transition loader */
+@keyframes track-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
 }

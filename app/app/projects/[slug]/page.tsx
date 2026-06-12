@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, ScrollText, ArrowDown, Component, Award } from "lucide-react";
+import { BookOpen, ScrollText, ArrowDown, ArrowUpRight, Component, Award } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Card, Empty, NotConfigured, PageTitle, SourceBadges, Tag, fmtDate, stripMd } from "@/components/ui";
 import Markdown from "@/components/Markdown";
@@ -31,7 +31,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   return (
     <div>
       <nav className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.1em]">
-        <Link href="/" className="text-ink-faint transition-colors hover:text-ink">
+        <Link
+          href="/"
+          className="text-ink-faint underline-offset-2 transition-colors hover:text-ink hover:underline"
+        >
           Projects
         </Link>
         <span className="text-rule-strong">/</span>
@@ -81,9 +84,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <Link
                 key={f.id}
                 href={`/projects/${slug}/${f.slug}`}
-                className="bg-paper p-5 transition-colors hover:bg-paper-sunk"
+                className="group relative bg-paper p-5 transition-colors hover:bg-paper-sunk"
               >
-                <div className="font-display text-lg font-medium text-ink">{f.name}</div>
+                {/* left accent — grows on hover */}
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-y-100"
+                />
+                <div className="flex items-center gap-1.5 font-display text-lg font-medium text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:underline">
+                  {f.name}
+                  <ArrowUpRight
+                    className="lucide h-4 w-4 -translate-x-1 text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                    strokeWidth={1.5}
+                  />
+                </div>
                 {f.description && (
                   <p className="mt-1 line-clamp-2 text-[16px] text-ink-soft">
                     {stripMd(f.description)}
@@ -137,9 +151,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 )}
                 <Link
                   href={`/entries/${e.id}`}
-                  className="mt-0.5 block font-display text-lg font-medium leading-snug text-ink hover:underline"
+                  className="group mt-0.5 block font-display text-lg font-medium leading-snug text-ink transition-transform duration-300 ease-out hover:-translate-y-0.5"
                 >
-                  {e.title}
+                  <span className="group-hover:underline">{e.title}</span>
+                  <ArrowUpRight
+                    className="lucide ml-1 inline h-4 w-4 -translate-x-1 align-[-2px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                    strokeWidth={1.5}
+                  />
                 </Link>
                 {e.outcome && (
                   <p className="mt-1 text-left text-[16px] leading-relaxed text-ink-soft [hyphens:auto] sm:text-justify">

@@ -24,14 +24,47 @@ export function PageTitle({
 }
 
 export function Card({ children, href }: { children: React.ReactNode; href?: string }) {
-  const cls =
-    "block border border-rule bg-paper p-6 transition-colors hover:border-rule-strong hover:bg-paper-sunk";
-  return href ? (
-    <Link href={href} className={cls}>
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className="group relative block border border-rule bg-paper p-6 transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-ink"
+      >
+        {/* top accent — grows on hover */}
+        <span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-x-100"
+        />
+        {children}
+      </Link>
+    );
+  }
+  return <div className="block border border-rule bg-paper p-6">{children}</div>;
+}
+
+/** Editorial text link with an arrow that slides on hover. */
+export function ArrowLink({
+  href,
+  children,
+  className = "",
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`group inline-flex items-center gap-1 font-medium text-ink-soft transition-[color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:text-ink ${className}`}
+    >
       {children}
+      <span
+        aria-hidden
+        className="transition-transform duration-300 ease-out group-hover:translate-x-1"
+      >
+        →
+      </span>
     </Link>
-  ) : (
-    <div className={cls}>{children}</div>
   );
 }
 

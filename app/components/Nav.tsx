@@ -22,13 +22,17 @@ export default function Nav() {
             key={n.href}
             href={n.href}
             aria-current={active ? "page" : undefined}
-            className={`text-[14px] font-medium underline-offset-[6px] transition-colors ${
-              active
-                ? "text-ink underline decoration-ink decoration-2"
-                : "text-ink-soft hover:text-ink"
+            className={`group relative inline-block text-[14px] font-medium transition-[color,transform] duration-300 ease-out hover:-translate-y-0.5 ${
+              active ? "text-ink" : "text-ink-soft hover:text-ink"
             }`}
           >
             {n.label}
+            <span
+              aria-hidden
+              className={`absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-ink transition-transform duration-300 ease-out ${
+                active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              }`}
+            />
           </Link>
         );
       })}

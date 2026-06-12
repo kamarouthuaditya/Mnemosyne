@@ -33,7 +33,10 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
       <div className="flex flex-wrap items-center gap-x-2 text-[13px] uppercase tracking-[0.08em] text-ink-faint">
         <span>{fmtDate(e.occurred_on)}</span>
         <span aria-hidden>/</span>
-        <Link href={`/projects/${e.projects?.slug}`} className="text-ink-soft hover:text-ink">
+        <Link
+          href={`/projects/${e.projects?.slug}`}
+          className="text-ink-soft underline-offset-2 transition-colors hover:text-ink hover:underline"
+        >
           {e.projects?.name}
         </Link>
         {e.features?.name && (

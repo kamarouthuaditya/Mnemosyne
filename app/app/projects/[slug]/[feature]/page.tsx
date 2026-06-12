@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate, stripMd } from "@/components/ui";
 
@@ -39,7 +40,7 @@ export default async function FeaturePage({
       <div className="mb-2">
         <Link
           href={`/projects/${slug}`}
-          className="label !text-ink-faint hover:!text-ink"
+          className="label !text-ink-faint underline-offset-2 hover:!text-ink hover:underline"
         >
           {project.name} /
         </Link>
@@ -58,9 +59,13 @@ export default async function FeaturePage({
             <div className="min-w-0">
               <Link
                 href={`/entries/${e.id}`}
-                className="block font-display text-lg font-medium leading-snug text-ink hover:underline"
+                className="group block font-display text-lg font-medium leading-snug text-ink transition-transform duration-300 ease-out hover:-translate-y-0.5"
               >
-                {e.title}
+                <span className="group-hover:underline">{e.title}</span>
+                <ArrowUpRight
+                  className="lucide ml-1 inline h-4 w-4 -translate-x-1 align-[-2px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                  strokeWidth={1.5}
+                />
               </Link>
               {e.outcome && (
                 <p className="mt-1 text-left text-[16px] leading-relaxed text-ink-soft [hyphens:auto] sm:text-justify">

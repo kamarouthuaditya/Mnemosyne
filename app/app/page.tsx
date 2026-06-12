@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ScrollText } from "lucide-react";
+import { ScrollText, ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Project } from "@/lib/types";
-import { Empty, NotConfigured, SourceBadges, fmtDate, excerpt } from "@/components/ui";
+import { ArrowLink, Empty, NotConfigured, SourceBadges, fmtDate, excerpt } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +44,7 @@ export default async function OverviewPage() {
     <div>
       {/* Editorial hero */}
       <section className="border-b border-rule pb-8">
-        <p className="label">Career Memory</p>
+        <p className="label">An Archive of Decisions, Not Just Outcomes</p>
         <h1 className="mt-5 max-w-[16ch] font-display text-5xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-7xl">
           Mnemosyne
         </h1>
@@ -63,7 +63,15 @@ export default async function OverviewPage() {
 
         <p className="mt-8 text-[14px] text-ink-faint">
           Designed and built by{" "}
-          <span className="font-medium text-ink">Aditya Kamarouthu</span>, sole creator.
+          <a
+            href="https://www.linkedin.com/in/adityakamarouthu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block font-medium text-ink underline-offset-4 transition-transform duration-300 ease-out hover:-translate-y-0.5 hover:underline"
+          >
+            Aditya Kamarouthu
+          </a>
+          .
         </p>
 
         {projects.length > 0 && (
@@ -79,9 +87,9 @@ export default async function OverviewPage() {
       <section className="mt-12">
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="label">Projects</h2>
-          <Link href="/timeline" className="text-[14px] font-medium text-ink-soft hover:text-ink">
-            View timeline →
-          </Link>
+          <ArrowLink href="/timeline" className="text-[14px]">
+            View timeline
+          </ArrowLink>
         </div>
 
         <NotConfigured />
@@ -96,16 +104,26 @@ export default async function OverviewPage() {
               <Link
                 key={p.id}
                 href={`/projects/${p.slug}`}
-                className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 border-b border-rule py-6 transition-colors hover:bg-paper-sunk"
+                className="group relative grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 border-b border-rule py-6 pl-0 transition-[padding] duration-300 ease-out hover:pl-5"
               >
-                <span className="font-mono text-[14px] tabular-nums text-ink-faint">
+                {/* left accent bar — grows on hover */}
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-y-100"
+                />
+
+                <span className="font-mono text-[14px] tabular-nums text-ink-faint transition-colors group-hover:text-ink">
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
                 <div className="min-w-0">
                   <div className="flex items-baseline gap-3">
-                    <h3 className="font-display text-2xl font-medium tracking-tight text-ink transition-colors group-hover:underline">
+                    <h3 className="inline-flex items-center gap-1.5 font-display text-2xl font-medium tracking-tight text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:underline">
                       {p.name}
+                      <ArrowUpRight
+                        className="lucide h-5 w-5 -translate-x-1 text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                        strokeWidth={1.5}
+                      />
                     </h3>
                     <span className="label shrink-0">{p.status}</span>
                   </div>
@@ -137,12 +155,9 @@ export default async function OverviewPage() {
               <ScrollText className="lucide h-5 w-5 text-ink-soft" strokeWidth={1.5} />
               Recent activity
             </h2>
-            <Link
-              href="/timeline"
-              className="text-[13px] font-medium text-ink-soft hover:text-ink"
-            >
-              Full timeline →
-            </Link>
+            <ArrowLink href="/timeline" className="text-[13px]">
+              Full timeline
+            </ArrowLink>
           </div>
 
           <div className="border-t border-rule pt-5">
@@ -152,27 +167,31 @@ export default async function OverviewPage() {
                 <Link
                   key={e.id}
                   href={`/entries/${e.id}`}
-                  className="group grid grid-cols-[6rem_1.25rem_minmax(0,1fr)] items-start gap-x-4 py-3.5 transition-colors hover:bg-paper-sunk sm:grid-cols-[7rem_1.25rem_minmax(0,1fr)_auto]"
+                  className="group grid grid-cols-[6rem_1.25rem_minmax(0,1fr)] items-start gap-x-4 py-3.5 sm:grid-cols-[7rem_1.25rem_minmax(0,1fr)_auto]"
                 >
-                  <time className="whitespace-nowrap pt-px text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                  <time className="whitespace-nowrap pt-px text-[13px] uppercase tracking-[0.06em] text-ink-faint transition-colors duration-300 group-hover:text-ink">
                     {fmtDate(e.occurred_on)}
                   </time>
 
-                  {/* connector rail */}
+                  {/* connector rail — node is the hover accent */}
                   <div className="relative flex justify-center self-stretch" aria-hidden>
                     {!last && (
-                      <span className="absolute left-1/2 top-2 bottom-[-1.75rem] w-px -translate-x-1/2 bg-rule-strong" />
+                      <span className="absolute left-1/2 top-2 bottom-[-1.75rem] w-px -translate-x-1/2 bg-rule-strong transition-colors duration-300 group-hover:bg-ink" />
                     )}
-                    <span className="relative z-10 mt-[5px] h-2.5 w-2.5 bg-ink ring-4 ring-paper" />
+                    <span className="relative z-10 mt-[5px] h-2.5 w-2.5 origin-center bg-ink ring-4 ring-paper transition-transform duration-300 ease-out group-hover:scale-[1.7]" />
                   </div>
 
                   <div className="min-w-0">
-                    <span className="label !text-ink-faint">
+                    <span className="label !text-ink-faint transition-colors group-hover:!text-ink-soft">
                       {e.projects?.name}
                       {e.features?.name ? ` / ${e.features.name}` : ""}
                     </span>
-                    <p className="mt-1 break-words font-display text-lg font-medium leading-snug text-ink group-hover:underline">
+                    <p className="mt-1 break-words font-display text-lg font-medium leading-snug text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:underline">
                       {e.title}
+                      <ArrowUpRight
+                        className="lucide ml-1 inline h-4 w-4 -translate-x-1 align-[-2px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                        strokeWidth={1.5}
+                      />
                     </p>
                   </div>
 
@@ -191,9 +210,15 @@ export default async function OverviewPage() {
 
 function Stat({ n, label }: { n: number | string; label: string }) {
   return (
-    <div className="flex flex-col justify-center py-4 first:pt-0 sm:px-8 sm:py-1.5 sm:first:pl-0 sm:first:pt-1.5">
-      <dd className="font-display text-3xl font-medium leading-none tabular-nums text-ink">{n}</dd>
-      <dt className="label mt-2">{label}</dt>
+    <div className="group flex cursor-default flex-col justify-center py-4 first:pt-0 sm:px-8 sm:py-1.5 sm:first:pl-0 sm:first:pt-1.5">
+      <dd className="inline-block w-fit font-display text-3xl font-medium leading-none tabular-nums text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
+        {n}
+        <span
+          aria-hidden
+          className="mt-1.5 block h-px origin-left scale-x-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-x-100"
+        />
+      </dd>
+      <dt className="label mt-2 transition-colors duration-300 group-hover:text-ink">{label}</dt>
     </div>
   );
 }

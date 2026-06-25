@@ -14,14 +14,16 @@ export default async function OverviewPage() {
   if (supabase) {
     const { data } = await supabase
       .from("projects")
-      .select("*, work_entries(occurred_on)")
-      .order("updated_at", { ascending: false });
+      .select("*, work_entries(occurred_on)");
 
-    projects = (data ?? []).map((p: any) => ({
-      ...p,
-      entries: p.work_entries?.length ?? 0,
-      last: p.work_entries?.map((e: any) => e.occurred_on).sort().at(-1) ?? null,
-    }));
+    projects = (data ?? [])
+      .map((p: any) => ({
+        ...p,
+        entries: p.work_entries?.length ?? 0,
+        last: p.work_entries?.map((e: any) => e.occurred_on).sort().at(-1) ?? null,
+      }))
+      // latest activity first; projects with no entries sink to the bottom
+      .sort((a, b) => (b.last ?? "").localeCompare(a.last ?? ""));
   }
 
   let recent: any[] = [];

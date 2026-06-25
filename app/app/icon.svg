@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#1e1c18"/>
+  <rect x="4.5" y="4.5" width="55" height="55" fill="none" stroke="#faf9f5" stroke-opacity="0.26" stroke-width="1"/>
+  <text x="32" y="46.5" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="44" font-weight="700" fill="#faf9f5">M</text>
+</svg>

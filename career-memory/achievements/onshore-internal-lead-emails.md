@@ -1,6 +1,6 @@
 ---
 type: achievement
-project: onshorelabs-email-template
+project: onshore-internal
 feature: lead-automation
 title: Shipped AI-personalized auto-replies for website leads
 impact: "Every website lead is now captured, logged, and answered automatically — high-intent prospects who describe their needs get an AI-written, on-brand reply in seconds instead of a generic template."

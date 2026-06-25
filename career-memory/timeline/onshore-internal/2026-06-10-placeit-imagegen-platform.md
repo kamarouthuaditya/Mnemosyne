@@ -1,6 +1,6 @@
 ---
 type: work_entry
-project: onshore-marketing-automation
+project: onshore-internal
 feature: placeit
 occurred_on: 2026-06-10
 title: Built a self-hosted Placid alternative (ImageGen) and shipped it to production

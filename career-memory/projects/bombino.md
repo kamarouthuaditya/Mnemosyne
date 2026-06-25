@@ -12,10 +12,16 @@ features:
     name: Admin Panel (admin-website-bombino)
   - slug: mail-automation
     name: Mail Automation
+  - slug: marketing-website
+    name: Bombino Express Website (website-bombino)
 ---
 
 Bombino Express — logistics/courier company. OnshoreLabs builds their consumer
 shipping app (bombino-express, mobile-first React/Vite + Express), an admin
-panel (Next.js, blog CMS + user management), and the marketing website plus
-its backend automations (n8n workflows for leads/forms/content, hosted on
-n8n cloud, synced locally via n8nac under website/workflows/onshorelabs).
+panel (Next.js, blog CMS + user management), and the marketing website
+(website-bombino — Next.js App Router; repo
+`https://github.com/ak-onshore-labs/website-bombino.git`) plus its backend
+automations (n8n workflows for leads/forms/content, hosted on n8n cloud, synced
+locally via n8nac under website/workflows/onshorelabs). The marketing site owns
+public forms — contact, quote, pickup, customs, KYC — each sending transactional
+email and logging to Google Sheets.

@@ -1,6 +1,6 @@
 ---
 type: work_entry
-project: onshorelabs-email-template
+project: onshore-internal
 feature: lead-automation
 occurred_on: 2026-06-11
 title: AI-personalized auto-replies for website leads

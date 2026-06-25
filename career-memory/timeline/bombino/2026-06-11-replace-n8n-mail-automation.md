@@ -1,6 +1,6 @@
 ---
 type: work_entry
-project: website-bombino
+project: bombino
 feature: mail-automation
 occurred_on: 2026-06-11
 title: Replaced n8n form-email automation with in-app SMTP sending

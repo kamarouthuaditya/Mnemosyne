@@ -1,6 +1,6 @@
 ---
 type: work_entry
-project: onshore-marketing-automation
+project: onshore-internal
 feature: n8n-content-engine
 occurred_on: 2026-04-16
 title: Built and activated the daily AI content-generation workflow in n8n

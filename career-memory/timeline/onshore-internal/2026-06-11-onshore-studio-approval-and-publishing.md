@@ -1,6 +1,6 @@
 ---
 type: work_entry
-project: onshore-marketing-automation
+project: onshore-internal
 feature: onshore-studio
 occurred_on: 2026-06-11
 title: Built Onshore Studio — the review, approve, and publish app over the content engine

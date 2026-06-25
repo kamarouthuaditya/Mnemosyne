@@ -97,14 +97,17 @@ class Pusher:
         self.projects[slug] = pid
         return pid
 
-    def feature_id(self, project_id: str, name: str) -> str | None:
-        if not name:
+    def feature_id(self, project_id: str, name: str, slug: str | None = None) -> str | None:
+        # Resolve by the explicit `slug` when given (project definitions), else slugify the
+        # name/string (work_entry/achievement `feature:` values are already slugs). This keeps a
+        # project's declared feature and the entries that reference it on the SAME row.
+        if not (slug or name):
             return None
-        fslug = slugify(name)
+        fslug = slugify(slug or name)
         key = (project_id, fslug)
         if key in self.features:
             return self.features[key]
-        row = {"project_id": project_id, "slug": fslug, "name": name}
+        row = {"project_id": project_id, "slug": fslug, "name": name or fslug}
         stored = self._upsert("features", row, "project_id,slug")
         fid = stored["id"] if stored else None
         if fid:
@@ -138,9 +141,9 @@ class Pusher:
         pid = self.project_id(m["slug"], fields)
         for feat in m.get("features", []) or []:
             if isinstance(feat, dict):
-                self.feature_id(pid, feat.get("name") or feat.get("slug"))
+                self.feature_id(pid, feat.get("name") or feat.get("slug"), slug=feat.get("slug"))
             else:
-                self.feature_id(pid, str(feat))
+                self.feature_id(pid, str(feat), slug=str(feat))
 
     def push_work_entry(self, post):
         m = post.metadata
@@ -222,6 +225,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Push career-memory markdown to Supabase.")
     ap.add_argument("--dry-run", action="store_true", help="print planned writes, don't push")
     ap.add_argument("--home", default=None, help="path to career-memory/ (default: repo)")
+    ap.add_argument(
+        "--prune",
+        action="store_true",
+        help="delete projects whose slug is absent from the markdown (cascade removes their "
+        "features/entries/achievements). Use after merging/renaming projects.",
+    )
     args = ap.parse_args()
 
     load_dotenv(REPO_ROOT / ".env")
@@ -260,8 +269,32 @@ def main() -> int:
         except Exception as e:  # noqa: BLE001 — keep going, report per-file
             sys.stderr.write(f"  ! {path.name}: {e}\n")
 
+    if args.prune:
+        prune_projects(pusher, client, args.dry_run)
+
     print(f"Done. {pusher.updated} rows upserted." if not args.dry_run else "Dry run complete.")
     return 0
+
+
+def prune_projects(pusher: "Pusher", client, dry_run: bool) -> None:
+    """Delete DB projects whose slug isn't in the markdown (cascade clears children)."""
+    valid = set(pusher.projects.keys())  # every slug seen while pushing
+    if not valid:
+        print("Prune skipped: no project slugs resolved from markdown.")
+        return
+    if dry_run or client is None:
+        print(f"[dry] prune: would keep {sorted(valid)}; delete any DB project not in that set.")
+        return
+    resp = client.table("projects").select("slug").execute()
+    db_slugs = {r["slug"] for r in (resp.data or [])}
+    stale = sorted(db_slugs - valid)
+    if not stale:
+        print("Prune: nothing to delete — DB projects match markdown.")
+        return
+    for slug in stale:
+        client.table("projects").delete().eq("slug", slug).execute()
+        print(f"  pruned project (cascade): {slug}")
+    print(f"Prune: deleted {len(stale)} obsolete project(s).")
 
 
 if __name__ == "__main__":

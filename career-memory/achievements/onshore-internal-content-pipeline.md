@@ -1,6 +1,6 @@
 ---
 type: achievement
-project: onshore-marketing-automation
+project: onshore-internal
 title: Shipped an end-to-end AI marketing-content pipeline — generate, render, approve, publish
 impact: "Replaced a paid image SaaS (Placid) with a self-hosted render API, and turned daily multi-platform social posting into an automated draft → human-approval → publish flow. Daily content engine live in production; zero per-render cost; nothing publishes without human sign-off."
 occurred_on: 2026-06-10

@@ -1,6 +1,6 @@
 ---
 type: achievement
-project: website-bombino
+project: bombino
 feature: mail-automation
 title: Eliminated an external automation service from the form-email pipeline
 impact: "Cut a hosted n8n dependency out of production, removing vendor lock-in and a class of untyped-template bugs, while keeping all five website form flows (contact, quote, pickup, customs, KYC) sending acknowledgement + team-alert emails — verified live before shipping."

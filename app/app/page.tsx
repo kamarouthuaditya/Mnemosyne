@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ScrollText, ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Project } from "@/lib/types";
-import { ArrowLink, Empty, NotConfigured, SourceBadges, fmtDate, excerpt } from "@/components/ui";
+import { ArrowLink, Empty, NotConfigured, SignificanceBadge, SourceBadges, fmtDate, excerpt, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +24,22 @@ export default async function OverviewPage() {
       }))
       // latest activity first; projects with no entries sink to the bottom
       .sort((a, b) => (b.last ?? "").localeCompare(a.last ?? ""));
+  }
+
+  let featured: any[] = [];
+  if (supabase) {
+    const { data } = await supabase
+      .from("work_entries")
+      .select(
+        "id, occurred_on, title, outcome, business_impact, significance, source, projects(name, slug), features(name)",
+      )
+      .in("significance", ["landmark", "notable"])
+      .order("occurred_on", { ascending: false });
+    // landmark first, then notable; newest within each tier
+    const rank: Record<string, number> = { landmark: 0, notable: 1 };
+    featured = (data ?? [])
+      .sort((a: any, b: any) => (rank[a.significance] ?? 9) - (rank[b.significance] ?? 9))
+      .slice(0, 4);
   }
 
   let recent: any[] = [];
@@ -85,12 +101,131 @@ export default async function OverviewPage() {
         )}
       </section>
 
-      {/* Project ledger */}
-      <section className="mt-12">
+      {/* Latest addition — the most recently active project, with what it's about */}
+      {projects[0] && (
+        <section className="mt-12">
+          <h2 className="label mb-6">Latest addition</h2>
+          <Link
+            href={`/projects/${projects[0].slug}`}
+            className="group relative block border border-rule bg-paper p-6 transition-colors duration-300 ease-out hover:border-ink sm:p-7"
+          >
+            <span
+              aria-hidden
+              className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-y-100"
+            />
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <span className="label shrink-0">{projects[0].status}</span>
+              {projects[0].last && (
+                <>
+                  <span aria-hidden className="text-rule-strong">·</span>
+                  <span className="text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                    updated {fmtDate(projects[0].last)}
+                  </span>
+                </>
+              )}
+            </div>
+            <h3 className="mt-3 inline-flex items-center gap-1.5 font-display text-2xl font-semibold tracking-tight text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:text-[28px]">
+              {projects[0].name}
+              <ArrowUpRight
+                className="lucide h-5 w-5 -translate-x-1 text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                strokeWidth={1.5}
+              />
+            </h3>
+            {projects[0].description && (
+              <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">
+                {excerpt(projects[0].description)}
+              </p>
+            )}
+            {recent[0] && recent[0].projects?.slug === projects[0].slug && (
+              <div className="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1 border-l-[3px] border-ink bg-paper-sunk px-4 py-2.5 text-[14px]">
+                <span className="label shrink-0 !text-ink">Latest entry</span>
+                <span aria-hidden className="text-rule-strong">·</span>
+                <span className="font-medium text-ink">{recent[0].title}</span>
+              </div>
+            )}
+          </Link>
+        </section>
+      )}
+
+      {/* Featured — the strongest reads, surfaced across projects */}
+      {featured.length > 0 && (
+        <section className="mt-14">
+          <div className="mb-6 flex items-baseline justify-between">
+            <h2 className="label">The strongest reads</h2>
+            <ArrowLink href="/timeline" className="text-[14px]">
+              All entries
+            </ArrowLink>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {featured.map((e) => {
+              const landmark = e.significance === "landmark";
+              return (
+                <Link
+                  key={e.id}
+                  href={`/entries/${e.id}`}
+                  className={`group relative block bg-paper p-6 transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 ${
+                    landmark
+                      ? "border-2 border-ink sm:col-span-2"
+                      : "border border-rule-strong hover:border-ink"
+                  }`}
+                >
+                  {landmark && (
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-x-100"
+                    />
+                  )}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                    <SignificanceBadge tier={e.significance} />
+                    <span className="text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                      {fmtDate(e.occurred_on)}
+                    </span>
+                    <span className="label !text-ink-faint">
+                      {e.projects?.name}
+                      {e.features?.name ? ` / ${e.features.name}` : ""}
+                    </span>
+                  </div>
+                  <h3
+                    className={`mt-3 font-display font-semibold leading-snug text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 ${
+                      landmark ? "text-2xl sm:text-[28px]" : "text-xl"
+                    }`}
+                  >
+                    <span className="group-hover:underline">{e.title}</span>
+                    <ArrowUpRight
+                      className="lucide ml-1 inline h-5 w-5 -translate-x-1 align-[-3px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                      strokeWidth={1.5}
+                    />
+                  </h3>
+                  {e.outcome && (
+                    <p
+                      className={`mt-2 text-[16px] leading-relaxed text-ink-soft ${
+                        landmark ? "" : "line-clamp-2"
+                      }`}
+                    >
+                      {stripMd(e.outcome)}
+                    </p>
+                  )}
+                  {landmark && e.business_impact && (
+                    <p className="mt-3 border-l-2 border-ink pl-3 text-[15px] font-medium leading-relaxed text-ink">
+                      {stripMd(e.business_impact)}
+                    </p>
+                  )}
+                  <div className="mt-3">
+                    <SourceBadges source={e.source} />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Project ledger — compact grid; full detail lives on /projects */}
+      <section className="mt-14">
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="label">Projects</h2>
-          <ArrowLink href="/timeline" className="text-[14px]">
-            View timeline
+          <ArrowLink href="/projects" className="text-[14px]">
+            All projects
           </ArrowLink>
         </div>
 
@@ -101,12 +236,12 @@ export default async function OverviewPage() {
         )}
 
         {projects.length > 0 && (
-          <div className="border-t border-rule">
-            {projects.map((p, i) => (
+          <div className="grid border-l border-t border-rule sm:grid-cols-2 lg:grid-cols-3">
+            {projects.map((p) => (
               <Link
                 key={p.id}
                 href={`/projects/${p.slug}`}
-                className="group relative grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 border-b border-rule py-6 pl-0 transition-[padding] duration-300 ease-out hover:pl-5"
+                className="group relative flex flex-col border-b border-r border-rule bg-paper p-5 transition-colors hover:bg-paper-sunk"
               >
                 {/* left accent bar — grows on hover */}
                 <span
@@ -114,33 +249,25 @@ export default async function OverviewPage() {
                   className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-y-100"
                 />
 
-                <span className="font-mono text-[14px] tabular-nums text-ink-faint transition-colors group-hover:text-ink">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-
-                <div className="min-w-0">
-                  <div className="flex items-baseline gap-3">
-                    <h3 className="inline-flex items-center gap-1.5 font-display text-2xl font-medium tracking-tight text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:underline">
-                      {p.name}
-                      <ArrowUpRight
-                        className="lucide h-5 w-5 -translate-x-1 text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
-                        strokeWidth={1.5}
-                      />
-                    </h3>
-                    <span className="label shrink-0">{p.status}</span>
-                  </div>
-                  {p.description && (
-                    <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">
-                      {excerpt(p.description)}
-                    </p>
-                  )}
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="inline-flex items-center gap-1.5 font-display text-xl font-medium leading-tight tracking-tight text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:underline">
+                    {p.name}
+                    <ArrowUpRight
+                      className="lucide h-4 w-4 -translate-x-1 text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                      strokeWidth={1.5}
+                    />
+                  </h3>
+                  <span className="label shrink-0">{p.status}</span>
                 </div>
 
-                <div className="hidden text-right sm:block">
-                  <p className="font-mono text-[17px] tabular-nums text-ink">{p.entries}</p>
-                  <p className="label mt-0.5">{p.entries === 1 ? "entry" : "entries"}</p>
+                <div className="mt-auto pt-4 flex items-baseline gap-2 text-[13px] text-ink-faint">
+                  <span className="font-mono tabular-nums text-ink-soft">{p.entries}</span>
+                  <span>{p.entries === 1 ? "entry" : "entries"}</span>
                   {p.last && (
-                    <p className="mt-2 text-[13px] text-ink-faint">last {fmtDate(p.last)}</p>
+                    <>
+                      <span aria-hidden className="text-rule-strong">·</span>
+                      <span>last {fmtDate(p.last)}</span>
+                    </>
                   )}
                 </div>
               </Link>

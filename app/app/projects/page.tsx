@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Project } from "@/lib/types";
-import { Empty, NotConfigured, PageTitle, fmtDate, excerpt } from "@/components/ui";
+import { Empty, KindBadge, NotConfigured, PageTitle, fmtDate, excerpt } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -65,6 +65,7 @@ export default async function ProjectsPage() {
                     />
                   </h3>
                   <span className="label shrink-0">{p.status}</span>
+                  {p.kind && <KindBadge kind={p.kind} client={p.client} />}
                 </div>
                 {p.description && (
                   <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">

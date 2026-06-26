@@ -134,6 +134,9 @@ class Pusher:
             "repo_path": m.get("repo_path"),
             "remote_url": m.get("remote_url"),
             "description": post.content.strip() or None,
+            "kind": m.get("kind"),
+            "why": m.get("why"),
+            "client": m.get("client"),
             "status": m.get("status", "active"),
             "started_at": str(m["started_at"]) if m.get("started_at") else None,
         }

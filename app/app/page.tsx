@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ScrollText, ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Project } from "@/lib/types";
-import { ArrowLink, Empty, NotConfigured, SignificanceBadge, SourceBadges, fmtDate, excerpt, stripMd } from "@/components/ui";
+import { ArrowLink, Empty, KindBadge, NotConfigured, SignificanceBadge, SourceBadges, fmtDate, excerpt, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -259,6 +259,12 @@ export default async function OverviewPage() {
                   </h3>
                   <span className="label shrink-0">{p.status}</span>
                 </div>
+
+                {p.kind && (
+                  <div className="mt-2.5">
+                    <KindBadge kind={p.kind} client={p.client} />
+                  </div>
+                )}
 
                 <div className="mt-auto pt-4 flex items-baseline gap-2 text-[13px] text-ink-faint">
                   <span className="font-mono tabular-nums text-ink-soft">{p.entries}</span>

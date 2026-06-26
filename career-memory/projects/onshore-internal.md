@@ -2,10 +2,17 @@
 type: project
 slug: onshore-internal
 name: Onshore Labs Internal Automation
+kind: internal
 repo_path: C:\Users\Aditya Kamarouthu\Work\OnshoreLabs
 remote_url: https://github.com/adityak-onshorelabs/onshorelabs-email-template.git
 status: active
 started_at: 2026-04-14
+why: |
+  OnShore Labs' own back office. These systems exist to take the routine, manual marketing and
+  lead-handling work off a person's plate — drafting the daily social posts, rendering branded
+  images, answering inbound leads — so the team's hours go to client work instead of repetitive ops.
+  **Internal tooling**: we built it for ourselves to buy back our own time and to stop paying for
+  outside services (e.g. replacing the paid image-templating SaaS with an in-house renderer).
 features:
   - slug: lead-automation
     name: Website Lead Automation

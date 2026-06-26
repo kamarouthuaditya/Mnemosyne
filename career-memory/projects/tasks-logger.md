@@ -2,10 +2,17 @@
 type: project
 slug: tasks-logger
 name: Tasks Logger
+kind: internal
 repo_path: C:\Users\Aditya Kamarouthu\Personal\projects\tasks-logger
 remote_url: ""
 status: active
 started_at: 2026-06-25
+why: |
+  Internal tooling for our own client-testing workflow. Every testing day produced a status report
+  that someone updated in a shared Google Sheet by hand — slow, error-prone, and easy to misformat
+  (a row pasted in the wrong place, a broken header). This exists to collapse that reporting into one
+  reliable command: log the day's fixes, format the tab, and notify the client with the exact layout
+  every time. **Internal tool**, built to kill a recurring manual chore — not a client deliverable.
 features:
   - slug: sheets-sync
     name: Sheets Sync Skill

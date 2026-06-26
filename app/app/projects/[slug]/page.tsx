@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen, ScrollText, ArrowDown, ArrowUpRight, Component, Award } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Card, Empty, NotConfigured, PageTitle, SignificanceBadge, SourceBadges, Tag, fmtDate, stripMd } from "@/components/ui";
+import { Card, Empty, KindBadge, NotConfigured, PageTitle, SignificanceBadge, SourceBadges, Tag, fmtDate, stripMd } from "@/components/ui";
 import Markdown from "@/components/Markdown";
 
 export const dynamic = "force-dynamic";
@@ -43,9 +43,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       <PageTitle title={project.name} />
       <div className="-mt-6 mb-8 flex flex-wrap items-center gap-2">
+        {project.kind && <KindBadge kind={project.kind} client={project.client} />}
         <Tag>{project.status}</Tag>
         {project.started_at && <Tag>since {fmtDate(project.started_at)}</Tag>}
       </div>
+
+      {/* Why this exists — the engagement (client) or the operational problem (internal) */}
+      {project.why && (
+        <section className="mb-12">
+          <h2 className="label mb-3">
+            {project.kind === "client" ? "The engagement" : "Why this exists"}
+          </h2>
+          <div className="border-l-2 border-ink pl-5 text-[17px]">
+            <Markdown>{project.why}</Markdown>
+          </div>
+        </section>
+      )}
 
       {/* How to read this — top-of-page guide */}
       <div className="mb-12 flex items-start gap-4 bg-paper-sunk px-5 py-4">

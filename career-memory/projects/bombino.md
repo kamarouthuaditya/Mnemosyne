@@ -2,9 +2,17 @@
 type: project
 slug: bombino
 name: Bombino
+kind: client
+client: Bombino Express
 repo_path: C:\Users\Aditya Kamarouthu\Work\OnshoreLabs\projects\bombino
 status: active
 started_at: 2026-04-25
+why: |
+  Bombino Express is a logistics / courier company that hired OnShore Labs to build and run its
+  digital presence end to end — the customer-facing shipping app, an internal admin panel, the public
+  marketing website, and the automations behind its lead and form handling. This is a **client
+  engagement**: OnShore owns delivery across all four surfaces. The "why" here isn't an internal
+  problem we set out to solve for ourselves — it's the scope a client trusted us to own.
 features:
   - slug: consumer-app
     name: Bombino Express App (bombino-express)

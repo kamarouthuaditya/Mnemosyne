@@ -103,6 +103,35 @@ export function SignificanceBadge({ tier }: { tier: "landmark" | "notable" | "st
   );
 }
 
+/** Single source of truth for how a project kind reads in the UI. */
+export function kindLabel(kind: "client" | "internal" | "personal", client?: string | null): string {
+  if (kind === "client") return client ? `Client · ${client}` : "Client engagement";
+  if (kind === "internal") return "Internal tool";
+  return "Personal project";
+}
+
+/**
+ * Project-kind marker. Client work gets the filled (ink) badge — it's the
+ * headline framing; internal/personal sit quieter as outlined chips. Monochrome,
+ * differentiated by weight + fill, never hue.
+ */
+export function KindBadge({
+  kind,
+  client,
+}: {
+  kind: "client" | "internal" | "personal";
+  client?: string | null;
+}) {
+  const cls = kind === "client" ? "bg-ink text-paper" : "border border-rule-strong text-ink-soft";
+  return (
+    <span
+      className={`inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] ${cls}`}
+    >
+      {kindLabel(kind, client)}
+    </span>
+  );
+}
+
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
     <span className="border border-rule-strong px-2 py-0.5 text-[11px] font-medium uppercase tracking-[0.1em] text-ink-soft">

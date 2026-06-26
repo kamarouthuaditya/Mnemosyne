@@ -2,10 +2,18 @@
 type: project
 slug: wisdom-tyretrack
 name: Wisdom TyreTrack
+kind: client
+client: Wisdom Transportation
 repo_path: C:\Users\Aditya Kamarouthu\Work\OnshoreLabs\projects\wisdom-tyretrack\app\wisdom-tyretrack
 remote_url: https://github.com/ak-onshore-labs/wisdom-tyretrack.git
 status: active
 started_at: 2026-03-29
+why: |
+  A tyre-lifecycle management system OnShore Labs built for **Wisdom Transportation's** fleet
+  operation. It tracks every tyre across trucks and trailers — from inventory through installation,
+  reuse, and disposal — and surfaces cost and performance analytics for fleet managers and the
+  tyre/maintenance staff who log changes on the shop floor. A **client engagement**: a product
+  delivered for Wisdom Transportation, not an internal tool we built for ourselves.
 features:
   - slug: tyre-change-wizard
     name: Tyre Change Wizard

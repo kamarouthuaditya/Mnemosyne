@@ -1,8 +1,13 @@
+export type ProjectKind = "client" | "internal" | "personal";
+
 export type Project = {
   id: string;
   slug: string;
   name: string;
   description: string | null;
+  kind: ProjectKind | null;
+  why: string | null;
+  client: string | null;
   status: string;
   started_at: string | null;
   updated_at: string;

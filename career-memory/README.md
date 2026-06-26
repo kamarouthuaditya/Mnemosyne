@@ -18,10 +18,15 @@ career-memory/
 type: project
 slug: bombino
 name: Bombino
+kind: client              # client | internal | personal — frames the `why` (see below)
+client: Bombino Express   # the client's name (only when kind: client)
 repo_path: C:\Users\...\bombino
 remote_url: git@github.com:onshore/bombino.git
 status: active            # active | paused | shipped | archived
 started_at: 2026-05-01
+why: |                    # project-level context — WHY it exists, framed by kind
+  Bombino Express is a logistics company that hired OnShore to build its shipping app, admin panel,
+  and marketing site. A client engagement — the scope a client trusted us to own.
 features:                 # named parts of the project
   - slug: admin-panel
     name: Admin Panel
@@ -30,6 +35,16 @@ features:                 # named parts of the project
 ---
 What the project is, who it's for, current state.
 ```
+**`kind` + `why`** carry the project-level *why it exists* — the context that no single entry owns.
+The framing differs by `kind`:
+- **`client`** — built for a client (an engagement). `why` = who the client is, what they hired
+  OnShore to build, and the scope/role. Set `client:` to their name. *Not* an internal problem.
+- **`internal`** — OnShore's own operational tooling. `why` = the manual/operational problem it
+  removes, and why build-vs-buy-vs-do-by-hand.
+- **`personal`** — your own product or experiment. `why` = the goal / what you're exploring.
+
+`why` renders as markdown on the project page under "The engagement" (client) or "Why this exists"
+(internal/personal); `kind` shows as a badge. Both optional — omit and the page just shows the body.
 
 ## type: work_entry — `timeline/<slug>/<date>-<entry>.md`
 ```markdown

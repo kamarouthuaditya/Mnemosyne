@@ -82,6 +82,27 @@ export function SourceBadges({ source }: { source: string[] }) {
   );
 }
 
+/**
+ * Significance marker for an entry. landmark/notable get an editorial label so
+ * the strongest reads announce themselves; standard renders nothing (the row IS
+ * the default). Differentiated by weight + fill, never hue — monochrome theme.
+ */
+export function SignificanceBadge({ tier }: { tier: "landmark" | "notable" | "standard" }) {
+  if (tier === "standard") return null;
+  const label = tier === "landmark" ? "Landmark read" : "Notable read";
+  const cls =
+    tier === "landmark"
+      ? "bg-ink text-paper"
+      : "border border-ink text-ink";
+  return (
+    <span
+      className={`inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] ${cls}`}
+    >
+      {label}
+    </span>
+  );
+}
+
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
     <span className="border border-rule-strong px-2 py-0.5 text-[11px] font-medium uppercase tracking-[0.1em] text-ink-soft">

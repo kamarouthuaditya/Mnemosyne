@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate, stripMd } from "@/components/ui";
+import { Empty, NotConfigured, PageTitle, SignificanceBadge, SourceBadges, fmtDate, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -87,6 +87,9 @@ export default async function TimelinePage() {
                           <span aria-hidden className="text-rule-strong">/</span>
                           <span>{e.features.name}</span>
                         </>
+                      )}
+                      {e.significance && e.significance !== "standard" && (
+                        <SignificanceBadge tier={e.significance} />
                       )}
                     </div>
 

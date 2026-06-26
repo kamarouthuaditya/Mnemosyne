@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TrendingUp } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { NotConfigured, SourceBadges, fmtDate } from "@/components/ui";
+import { NotConfigured, SignificanceBadge, SourceBadges, fmtDate } from "@/components/ui";
 import Markdown from "@/components/Markdown";
 
 export const dynamic = "force-dynamic";
@@ -46,6 +46,12 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
           </>
         )}
       </div>
+
+      {e.significance && e.significance !== "standard" && (
+        <div className="mt-3">
+          <SignificanceBadge tier={e.significance} />
+        </div>
+      )}
 
       <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink">
         {e.title}

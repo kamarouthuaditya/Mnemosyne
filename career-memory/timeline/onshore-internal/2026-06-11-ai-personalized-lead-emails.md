@@ -6,6 +6,7 @@ occurred_on: 2026-06-11
 title: AI-personalized auto-replies for website leads
 source: [manual]
 source_ref: manual
+significance: standard
 skills: [n8n, google-gemini, gmail-api, google-sheets, html-email]
 files_changed: 3
 context: "Every website lead got the same generic auto-reply — prospects who took time to describe their problem got a templated welcome that ignored what they wrote."

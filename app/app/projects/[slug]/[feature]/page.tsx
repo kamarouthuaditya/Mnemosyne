@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Empty, NotConfigured, PageTitle, SourceBadges, fmtDate, stripMd } from "@/components/ui";
+import { Empty, NotConfigured, PageTitle, SignificanceBadge, SourceBadges, fmtDate, stripMd } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +57,11 @@ export default async function FeaturePage({
               {fmtDate(e.occurred_on)}
             </div>
             <div className="min-w-0">
+              {e.significance && e.significance !== "standard" && (
+                <div className="mb-1.5">
+                  <SignificanceBadge tier={e.significance} />
+                </div>
+              )}
               <Link
                 href={`/entries/${e.id}`}
                 className="group block font-display text-lg font-medium leading-snug text-ink transition-transform duration-300 ease-out hover:-translate-y-0.5"

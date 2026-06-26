@@ -6,6 +6,7 @@ occurred_on: 2026-06-11
 title: Replaced n8n form-email automation with in-app SMTP sending
 source: [commit, transcript]
 source_ref: c419ee1
+significance: notable
 skills: [next.js, typescript, nodemailer, smtp, email-deliverability]
 files_changed: 6
 context: "Every website form (contact, quote, pickup, customs, KYC) routed through a hosted n8n workflow over a webhook to send the customer acknowledgement + internal team alert. That meant a whole external service to host and keep alive, plus all email logic and HTML templates living in n8n's stringly-typed {{ }} expressions — no type-safety, no version control alongside the app, and a vendor we were locked into for a job the app could do itself."

@@ -41,6 +41,7 @@ occurred_on: 2026-06-11
 title: Built transactional mail automation
 source: [commit, transcript]    # commit | transcript | pr | todo | manual
 source_ref: a1b2c3d             # sha / pr# / "manual"
+significance: notable           # landmark | notable | standard — how powerful a read this is (see below)
 skills: [next.js, supabase, resend]
 files_changed: 12
 context: "Manual order-confirmation emails were bottlenecking ops."
@@ -74,6 +75,18 @@ PM-showcase layer — critical thinking as structured data, not buried prose. `b
 optional and holds the concrete value (cost saved/added, time, revenue, risk) with currency, e.g.
 `"Placid cost ~$39/mo (~₹4.5k/mo); now self-hosted at ~$0."` For `/worklog note`
 entries (`source: [manual]`) these fields ARE the deliverable.
+
+**`significance`** is the editorial weight of the entry — how powerful a read it is — and drives how
+the app tiers it (featured cards for the standouts vs a flat ledger row). Judge it against the
+project, not in absolute terms; most entries are `standard`.
+- **`landmark`** — rare. A field-defining decision: a whole platform/system built, a vendor or
+  paradigm replaced, hard business impact (real $/time figures), or the single best read in a project.
+- **`notable`** — a strong read: real architectural judgment, a non-obvious trade-off, or meaningful
+  impact worth surfacing above the rest.
+- **`standard`** — a normal entry (the default). Incremental work, follow-ons, routine builds.
+
+Aim for a pyramid per project: many `standard`, a few `notable`, at most one or two `landmark`. If
+omitted, the column defaults to `standard`.
 
 ## type: achievement — `achievements/<slug>.md`
 ```markdown

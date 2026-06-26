@@ -17,6 +17,8 @@ export type Feature = {
   status: string;
 };
 
+export type Significance = "landmark" | "notable" | "standard";
+
 export type WorkEntry = {
   id: string;
   project_id: string;
@@ -24,6 +26,7 @@ export type WorkEntry = {
   occurred_on: string;
   title: string;
   summary: string | null;
+  significance: Significance;
   source: string[];
   source_ref: string | null;
   files_changed: number | null;

@@ -6,6 +6,7 @@ occurred_on: 2026-06-08
 title: Built automated email pipeline for Bombino website form submissions
 source: [manual]
 source_ref: manual
+significance: standard
 skills: [n8n, gmail-api, smtp, automation, email-templates]
 files_changed: 1
 context: |

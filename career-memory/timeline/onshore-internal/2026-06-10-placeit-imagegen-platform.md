@@ -6,6 +6,7 @@ occurred_on: 2026-06-10
 title: Built a self-hosted Placid alternative (ImageGen) and shipped it to production
 source: [commit, transcript]
 source_ref: 05ee1e3
+significance: landmark
 skills: [next.js, typescript, supabase, "@napi-rs/canvas", sharp, vercel, api-design, image-rendering]
 files_changed: 93
 context: "The content pipeline needed branded images generated from templates + text on demand. The obvious option, Placid, is a paid SaaS with per-render pricing and an external dependency we'd be locked into. We wanted full control of the templates, the rendering, and the cost — and an API our own automation could call."

@@ -6,6 +6,7 @@ occurred_on: 2026-04-01
 title: Cut tyre-change logging from 6 steps to 3
 source: [manual]
 source_ref: manual
+significance: notable
 skills: [next.js, react, typescript, ux, state-machines]
 files_changed: 6
 context: "Logging one tyre change forced staff through 6 separate full-screen steps — vehicle, position, KM/date, disposition, fit-tyre, review. Tyre staff log changes on the shop floor, often on mobile; the long linear walk was the main UX friction in the app."

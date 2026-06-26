@@ -157,6 +157,7 @@ class Pusher:
             "summary": post.content.strip() or None,
             "source": m.get("source", []) or [],
             "source_ref": str(m.get("source_ref") or "manual"),
+            "significance": m.get("significance"),
             "files_changed": m.get("files_changed"),
             "context": m.get("context"),
             "options_considered": m.get("options_considered"),

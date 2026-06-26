@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen, ScrollText, ArrowDown, ArrowUpRight, Component, Award } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import { Card, Empty, NotConfigured, PageTitle, SourceBadges, Tag, fmtDate, stripMd } from "@/components/ui";
+import { Card, Empty, NotConfigured, PageTitle, SignificanceBadge, SourceBadges, Tag, fmtDate, stripMd } from "@/components/ui";
 import Markdown from "@/components/Markdown";
 
 export const dynamic = "force-dynamic";
@@ -136,40 +136,105 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           Entries
         </h2>
         {(!entries || entries.length === 0) && <Empty>No entries yet.</Empty>}
-        <div className="border-t border-rule">
-          {entries?.map((e) => (
-            <article
-              key={e.id}
-              className="grid grid-cols-[6.5rem_1fr] gap-x-5 border-b border-rule py-5"
-            >
-              <div className="pt-0.5 text-[13px] uppercase tracking-[0.06em] text-ink-faint">
-                {fmtDate(e.occurred_on)}
-              </div>
-              <div className="min-w-0">
-                {e.features?.name && (
-                  <div className="label !text-ink-faint">{e.features.name}</div>
-                )}
+        <div className="space-y-5">
+          {entries?.map((e) => {
+            const tier = (e.significance ?? "standard") as "landmark" | "notable" | "standard";
+
+            // landmark / notable break out of the row list into a featured card
+            if (tier !== "standard") {
+              const landmark = tier === "landmark";
+              return (
                 <Link
+                  key={e.id}
                   href={`/entries/${e.id}`}
-                  className="group mt-0.5 block font-display text-lg font-medium leading-snug text-ink transition-transform duration-300 ease-out hover:-translate-y-0.5"
+                  className={`group relative block bg-paper p-6 transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 sm:p-7 ${
+                    landmark
+                      ? "border-2 border-ink"
+                      : "border border-rule-strong hover:border-ink"
+                  }`}
                 >
-                  <span className="group-hover:underline">{e.title}</span>
-                  <ArrowUpRight
-                    className="lucide ml-1 inline h-4 w-4 -translate-x-1 align-[-2px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
-                    strokeWidth={1.5}
-                  />
+                  {landmark && (
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-x-100"
+                    />
+                  )}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                    <SignificanceBadge tier={tier} />
+                    <span className="text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                      {fmtDate(e.occurred_on)}
+                    </span>
+                    {e.features?.name && (
+                      <span className="label !text-ink-faint">{e.features.name}</span>
+                    )}
+                  </div>
+                  <h3
+                    className={`mt-3 font-display font-semibold leading-snug text-ink transition-transform duration-300 ease-out group-hover:-translate-y-0.5 ${
+                      landmark ? "text-2xl sm:text-[28px]" : "text-xl"
+                    }`}
+                  >
+                    <span className="group-hover:underline">{e.title}</span>
+                    <ArrowUpRight
+                      className="lucide ml-1 inline h-5 w-5 -translate-x-1 align-[-3px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                      strokeWidth={1.5}
+                    />
+                  </h3>
+                  {e.outcome && (
+                    <p
+                      className={`mt-2 text-[16px] leading-relaxed text-ink-soft ${
+                        landmark ? "" : "line-clamp-2"
+                      }`}
+                    >
+                      {stripMd(e.outcome)}
+                    </p>
+                  )}
+                  {landmark && e.business_impact && (
+                    <p className="mt-3 border-l-2 border-ink pl-3 text-[15px] font-medium leading-relaxed text-ink">
+                      {stripMd(e.business_impact)}
+                    </p>
+                  )}
+                  <div className="mt-3">
+                    <SourceBadges source={e.source} />
+                  </div>
                 </Link>
-                {e.outcome && (
-                  <p className="mt-1 text-left text-[16px] leading-relaxed text-ink-soft [hyphens:auto] sm:text-justify">
-                    {stripMd(e.outcome)}
-                  </p>
-                )}
-                <div className="mt-2">
-                  <SourceBadges source={e.source} />
+              );
+            }
+
+            // standard — the default compact ledger row
+            return (
+              <article
+                key={e.id}
+                className="grid grid-cols-[6.5rem_1fr] gap-x-5 border-b border-rule pb-5"
+              >
+                <div className="pt-0.5 text-[13px] uppercase tracking-[0.06em] text-ink-faint">
+                  {fmtDate(e.occurred_on)}
                 </div>
-              </div>
-            </article>
-          ))}
+                <div className="min-w-0">
+                  {e.features?.name && (
+                    <div className="label !text-ink-faint">{e.features.name}</div>
+                  )}
+                  <Link
+                    href={`/entries/${e.id}`}
+                    className="group mt-0.5 block font-display text-lg font-medium leading-snug text-ink transition-transform duration-300 ease-out hover:-translate-y-0.5"
+                  >
+                    <span className="group-hover:underline">{e.title}</span>
+                    <ArrowUpRight
+                      className="lucide ml-1 inline h-4 w-4 -translate-x-1 align-[-2px] text-ink-soft opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                      strokeWidth={1.5}
+                    />
+                  </Link>
+                  {e.outcome && (
+                    <p className="mt-1 text-left text-[16px] leading-relaxed text-ink-soft [hyphens:auto] sm:text-justify">
+                      {stripMd(e.outcome)}
+                    </p>
+                  )}
+                  <div className="mt-2">
+                    <SourceBadges source={e.source} />
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
     </div>

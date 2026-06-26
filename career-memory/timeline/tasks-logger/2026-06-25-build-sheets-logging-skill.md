@@ -5,6 +5,7 @@ occurred_on: 2026-06-25
 title: Built the tasks-logger Google Sheets skill (OAuth + robust header detection)
 source: [transcript]
 source_ref: manual
+significance: notable
 skills: [python, google-sheets-api, google-drive-api, oauth, claude-code-skills]
 files_changed: 7
 context: "Client testing produces bug lists we fix and report in a shared Google Sheet, edited by hand each day. Goal: a /tasks-logger skill to log fixes into the sheet in the exact existing format — pick an existing project (new dated tab) or create a new project sheet."

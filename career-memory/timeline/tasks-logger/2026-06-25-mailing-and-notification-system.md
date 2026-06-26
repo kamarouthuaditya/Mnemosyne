@@ -6,6 +6,7 @@ occurred_on: 2026-06-25
 title: Added email notifications (PDF report) and report-tab formatting to tasks-logger
 source: [transcript]
 source_ref: manual
+significance: standard
 skills: [python, gmail-api, google-sheets-api, oauth, html-email]
 files_changed: 4
 context: "After logging a day's fixes into the Google Sheet, the team still manually told the client it was done (a WhatsApp message). The skill could write rows but couldn't notify anyone, and freshly created tabs weren't formatted to match the client-facing report look."

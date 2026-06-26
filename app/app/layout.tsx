@@ -6,6 +6,7 @@ import NoContextMenu from "@/components/NoContextMenu";
 import Splash from "@/components/Splash";
 import GridField from "@/components/GridField";
 import NavLoader from "@/components/NavLoader";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NoContextMenu />
         <Splash />
         <NavLoader />
+        <SmoothScroll>
         <header className="relative bg-paper border-b border-rule">
           <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 sm:px-6 sm:py-5">
             <Link href="/" className="group inline-flex items-baseline">
@@ -74,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
           </div>
         </footer>
+        </SmoothScroll>
       </body>
     </html>
   );
